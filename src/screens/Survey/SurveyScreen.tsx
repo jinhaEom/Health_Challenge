@@ -61,46 +61,46 @@ const SurveyScreen = () => {
     return (
       <View className="flex-1 bg-white">
         <ScrollView>
-        <View className="flex-1 justify-center items-center p-[24px]">
-          <Text className="text-[30px] font-bold text-gray-800 mb-[24px]">건강체크 결과</Text>
-          
-          <View className="bg-gray-50 rounded-[16px] p-[32px] w-full items-center mb-[32px]">
-            <Text className="text-[60px] font-bold mb-[16px]" style={{ color }}>{score}점</Text>
-            <Text className="text-[20px] font-semibold mb-[8px]" style={{ color }}>{level}</Text>
-            <Text className="text-gray-600 text-center">{advice}</Text>
-          </View>
+          <View className="flex-1 justify-center items-center p-[24px]">
+            <Text className="text-[30px] font-bold text-gray-800 mb-[24px]">건강체크 결과</Text>
 
-          <View className="w-full">
-            <Text className="text-[18px] font-semibold text-gray-800 mb-[16px]">상세 결과</Text>
-            {questions.map((question, index) => (
-              <View key={question.id} className="bg-white border border-gray-200 rounded-[8px] p-[16px] mb-[12px]">
-                <Text className="text-[14px] text-gray-600 mb-[4px]">{question.question}</Text>
-                <Text className="text-base font-medium text-gray-800">
-                  {question.options[answers[question.id] || 0]}
-                </Text>
-              </View>
-            ))}
-          </View>
+            <View className="bg-gray-50 rounded-[16px] p-[32px] w-full items-center mb-[32px]">
+              <Text className="text-[60px] font-bold mb-[16px]" style={{ color }}>{score}점</Text>
+              <Text className="text-[20px] font-semibold mb-[8px]" style={{ color }}>{level}</Text>
+              <Text className="text-gray-600 text-center">{advice}</Text>
+            </View>
 
-          <TouchableOpacity
-            className="bg-gray-500 rounded-[12px] py-[16px] px-[32px] mt-[24px]"
-            onPress={() => {
-              setCurrentIndex(0);
-              setAnswers({});
-              setShowResult(false);
-            }}
-          >
-            <Text className="text-white text-[18px] font-semibold">다시 검사하기</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            className="bg-blue-500 rounded-[12px] py-[16px] px-[32px] mt-[24px]"
-            onPress={() => {
-              navigation.navigate('HomeScreen');
-            }}
-          >
-            <Text className="text-white text-[18px] font-semibold">앱 이용하기</Text>
-          </TouchableOpacity>
-        </View>
+            <View className="w-full">
+              <Text className="text-[18px] font-semibold text-gray-800 mb-[16px]">상세 결과</Text>
+              {questions.map((question, index) => (
+                <View key={question.id} className="bg-white border border-gray-200 rounded-[8px] p-[16px] mb-[12px]">
+                  <Text className="text-[14px] text-gray-600 mb-[4px]">{question.question}</Text>
+                  <Text className="text-base font-medium text-gray-800">
+                    {question.options[answers[question.id] || 0]}
+                  </Text>
+                </View>
+              ))}
+            </View>
+
+            <TouchableOpacity
+              className="bg-gray-500 rounded-[12px] py-[16px] px-[32px] mt-[24px]"
+              onPress={() => {
+                setCurrentIndex(0);
+                setAnswers({});
+                setShowResult(false);
+              }}
+            >
+              <Text className="text-white text-[18px] font-semibold">다시 검사하기</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              className="bg-blue-500 rounded-[12px] py-[16px] px-[32px] mt-[24px]"
+              onPress={() => {
+                navigation.navigate('MainTabs');
+              }}
+            >
+              <Text className="text-white text-[18px] font-semibold">앱 이용하기</Text>
+            </TouchableOpacity>
+          </View>
         </ScrollView>
       </View>
     );
@@ -114,9 +114,8 @@ const SurveyScreen = () => {
           {questions.map((_, index) => (
             <View
               key={index}
-              className={`h-[12px] flex-1 mx-[4px] rounded-[12px] ${
-                index <= currentIndex ? 'bg-white' : 'bg-blue-300'
-              }`}
+              className={`h-[12px] flex-1 mx-[4px] rounded-[12px] ${index <= currentIndex ? 'bg-white' : 'bg-blue-300'
+                }`}
             />
           ))}
         </View>
@@ -135,19 +134,17 @@ const SurveyScreen = () => {
             {questions[currentIndex].options.map((option, index) => (
               <TouchableOpacity
                 key={index}
-                className={`p-[16px] mb-[16px] rounded-[12px] border-2 ${
-                  answers[questions[currentIndex].id] === index
+                className={`p-[16px] mb-[16px] rounded-[12px] border-2 ${answers[questions[currentIndex].id] === index
                     ? 'border-blue-500 bg-blue-50'
                     : 'border-gray-200 bg-white'
-                }`}
+                  }`}
                 onPress={() => handleAnswer(questions[currentIndex].id, index)}
               >
                 <Text
-                  className={`text-[18px] ${
-                    answers[questions[currentIndex].id] === index
+                  className={`text-[18px] ${answers[questions[currentIndex].id] === index
                       ? 'text-blue-600 font-semibold'
                       : 'text-gray-700'
-                  }`}
+                    }`}
                 >
                   {option}
                 </Text>
@@ -156,11 +153,10 @@ const SurveyScreen = () => {
           </View>
 
           <TouchableOpacity
-            className={`py-[16px] px-[32px] rounded-[12px] ${
-              answers[questions[currentIndex].id] !== undefined
+            className={`py-[16px] px-[32px] rounded-[12px] ${answers[questions[currentIndex].id] !== undefined
                 ? 'bg-blue-500'
                 : 'bg-gray-300'
-            }`}
+              }`}
             onPress={handleNext}
             disabled={answers[questions[currentIndex].id] === undefined}
           >

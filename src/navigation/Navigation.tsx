@@ -8,16 +8,17 @@ import {
     RouteProp,
 } from '@react-navigation/native';
 import SignUpScreen from '../screens/Login/SignUpScreen';
-import HomeScreen from '../screens/Home/HomeScreen';
 import SurveyScreen from '../screens/Survey/SurveyScreen';
-
+import ProductDetailScreen from '../screens/Home/ProductDetailScreen';
+import BottomTab from './BottomTab';
 const Stack = createNativeStackNavigator();
 
 export type RootStackParamList = {
     LoginScreen: undefined;
     SignUpScreen: undefined;
-    HomeScreen: undefined;
     SurveyScreen: undefined;
+    MainTabs: undefined;
+    ProductDetailScreen: { id: string };
 }
 
 export const Navigation = () => {
@@ -32,7 +33,8 @@ export const Navigation = () => {
                 <Stack.Screen name='LoginScreen' component={LoginScreen} />
                 <Stack.Screen name='SignUpScreen' component={SignUpScreen} />
                 <Stack.Screen name='SurveyScreen' component={SurveyScreen} />
-                <Stack.Screen name='HomeScreen' component={HomeScreen} />
+                <Stack.Screen name='MainTabs' component={BottomTab} />
+                <Stack.Screen name='ProductDetailScreen' component={ProductDetailScreen} />
             </Stack.Navigator>
         </NavigationContainer>
 
