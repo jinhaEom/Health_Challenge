@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import { useRootNavigation } from '../../navigation/Navigation';
 import TextInputBox from '../../components/TextInputBox';
+import { useDialog } from '../../hooks/useDialog';
 
 interface SignUpFormData {
   username: string;
@@ -23,7 +24,8 @@ interface ValidationErrors {
 
 const SignUpScreen = () => {
   const navigation = useRootNavigation();
-  
+  const { showDialog, DialogComponent } = useDialog();
+
   const [formData, setFormData] = useState<SignUpFormData>({
     username: '',
     email: '',
@@ -32,7 +34,7 @@ const SignUpScreen = () => {
     name: '',
     phoneNumber: ''
   });
-  
+
   const [errors, setErrors] = useState<ValidationErrors>({});
   const [isLoading, setIsLoading] = useState(false);
 
@@ -80,7 +82,7 @@ const SignUpScreen = () => {
 
     if (!formData.phoneNumber.trim()) {
       newErrors.phoneNumber = '핸드폰 번호를 입력해주세요';
-    } 
+    }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -88,16 +90,16 @@ const SignUpScreen = () => {
 
   const mockSignUp = async (): Promise<boolean> => {
     await new Promise(resolve => setTimeout(resolve, 1500));
-    
+
     const existingUsers = [
       'admin', 'user123', 'test', 'demo'
     ];
-    
+
     if (existingUsers.includes(formData.username.toLowerCase())) {
       setErrors({ username: '이미 존재하는 아이디입니다' });
       return false;
     }
-    
+
     const chance = Math.random();
     return chance > 0.1;
   };
@@ -108,19 +110,17 @@ const SignUpScreen = () => {
     }
 
     setIsLoading(true);
-    
+
     try {
       const success = await mockSignUp();
-      
+
       if (success) {
-        Alert.alert(
-          '회원가입 성공', 
-          `${formData.name}님, 환영합니다!`,
-          [{
-            text: '확인',
-            onPress: () => navigation.navigate('LoginScreen')
-          }]
-        );
+        showDialog({
+          title: '회원가입 완료',
+          message: '회원가입이 완료되었습니다!',
+          onConfirm: () => navigation.navigate('LoginScreen'),
+          onCancel: () => navigation.navigate('LoginScreen')
+        });
       } else {
         Alert.alert('회원가입 실패', '회원가입 중 오류가 발생했습니다.');
       }
@@ -138,7 +138,7 @@ const SignUpScreen = () => {
           <Text className="text-[32px] font-bold text-blue-800 text-center mb-[8px]">
             회원가입
           </Text>
-      
+
 
           <View className="mb-[32px]">
             <Text className="text-[16px] font-semibold text-gray-700 mb-[8px] ml-[4px]">
@@ -230,9 +230,8 @@ const SignUpScreen = () => {
           </View>
 
           <TouchableOpacity
-            className={`rounded-[12px] py-[16px] mb-[16px] ${
-              isLoading ? 'bg-gray-400' : 'bg-blue-800'
-            }`}
+            className={`rounded-[12px] py-[16px] mb-[16px] ${isLoading ? 'bg-gray-400' : 'bg-blue-800'
+              }`}
             onPress={handleSignUp}
             disabled={isLoading}
           >
@@ -251,6 +250,7 @@ const SignUpScreen = () => {
           </TouchableOpacity>
         </View>
       </ScrollView>
+      <DialogComponent />
     </View>
   );
 };
