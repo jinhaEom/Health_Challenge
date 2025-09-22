@@ -15,11 +15,12 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { useState } from 'react';
 import { ProductReview } from '../../data/ProductReview';
+import { useCartStore } from '../../store/useCartStore';
+import Toast from 'react-native-simple-toast';
+import PlusMinusButton from '../../components/PlusMinusButton';
 
 const Tab = createMaterialTopTabNavigator();
 const { width } = Dimensions.get('window');
-
-// 이미지 슬라이더 컴포넌트
 const ImageSlider = ({ images }: { images: string[] }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -63,10 +64,11 @@ const ImageSlider = ({ images }: { images: string[] }) => {
   );
 };
 
-// 상품 정보 탭 
+// 상품 정보 탭
 const ProductInfoTab = ({ product }: { product: ProductInfo }) => {
   const [quantity, setQuantity] = useState(1);
   const animatedValue = useState(new Animated.Value(1))[0];
+  const { addToCart } = useCartStore();
 
   const increaseQuantity = () => {
     setQuantity(prev => prev + 1);
@@ -78,7 +80,18 @@ const ProductInfoTab = ({ product }: { product: ProductInfo }) => {
     }
   };
 
-  const addToCart = () => {
+  const handleAddToCart = () => {
+    // 장바구니에 상품 추가
+    addToCart({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      quantity: quantity,
+    });
+    Toast.show('장바구니에 상품이 추가되었습니다.', Toast.LONG, {
+      tapToDismissEnabled: true,
+    });
+
     // 장바구니 애니메이션
     Animated.sequence([
       Animated.timing(animatedValue, {
@@ -97,10 +110,10 @@ const ProductInfoTab = ({ product }: { product: ProductInfo }) => {
         useNativeDriver: true,
       }),
     ]).start();
-    console.log('장바구니에 상품 추가');
   };
 
   const totalPrice = (product?.price || 0) * quantity;
+  const navigation = useRootNavigation();
 
   return (
     <View className="flex-1">
@@ -116,21 +129,7 @@ const ProductInfoTab = ({ product }: { product: ProductInfo }) => {
         <View className="flex-row items-center justify-between mb-[16px]">
           <Text className="text-[24px] font-semibold">수량</Text>
           <View className="flex-row items-center">
-            <TouchableOpacity
-              onPress={decreaseQuantity}
-              className="w-[42px] h-[42px] border border-gray-300 rounded-l-lg justify-center items-center"
-            >
-              <Ionicons name="remove" size={20} color="#666" />
-            </TouchableOpacity>
-            <View className="w-[42px] h-[42px] border-t border-b border-gray-300 justify-center items-center">
-              <Text className="text-lg font-semibold">{quantity}</Text>
-            </View>
-            <TouchableOpacity
-              onPress={increaseQuantity}
-              className="w-[42px] h-[42px] border border-gray-300 rounded-r-lg justify-center items-center"
-            >
-              <Ionicons name="add" size={20} color="#666" />
-            </TouchableOpacity>
+            <PlusMinusButton onDecrease={decreaseQuantity} onIncrease={increaseQuantity} quantity={quantity} />
           </View>
         </View>
 
@@ -144,7 +143,7 @@ const ProductInfoTab = ({ product }: { product: ProductInfo }) => {
 
         <View className="flex-row space-x-[16px]">
           <TouchableOpacity
-            onPress={addToCart}
+            onPress={handleAddToCart}
             className="flex-1 bg-gray-100 py-[16px] rounded-[12px] flex-row justify-center items-center"
           >
             <Animated.View style={{ transform: [{ scale: animatedValue }] }}>
@@ -153,7 +152,7 @@ const ProductInfoTab = ({ product }: { product: ProductInfo }) => {
             <Text className="ml-2 text-gray-600 font-semibold">장바구니</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity className="flex-1 bg-blue-500 py-[16px] rounded-[12px] justify-center items-center">
+          <TouchableOpacity className="flex-1 bg-blue-500 py-[16px] rounded-[12px] justify-center items-center" onPress={() => navigation.navigate('PurchaseScreen', { id: product.id.toString(), quantity: quantity, price: product.price, name: product.name })}>
             <Text className="text-white font-bold text-lg">구매하기</Text>
           </TouchableOpacity>
         </View>

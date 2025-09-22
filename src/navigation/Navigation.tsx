@@ -11,6 +11,8 @@ import SignUpScreen from '../screens/Login/SignUpScreen';
 import SurveyScreen from '../screens/Survey/SurveyScreen';
 import ProductDetailScreen from '../screens/Home/ProductDetailScreen';
 import BottomTab from './BottomTab';
+import BasketScreen from '../screens/Basket/BasketScreen';
+import PurchaseScreen from '../screens/Purchase/PurchaseScreen';
 const Stack = createNativeStackNavigator();
 
 export type RootStackParamList = {
@@ -19,6 +21,8 @@ export type RootStackParamList = {
     SurveyScreen: undefined;
     MainTabs: undefined;
     ProductDetailScreen: { id: string };
+    BasketScreen: undefined;
+    PurchaseScreen: { id: string, quantity: number , price: number, name: string};
 }
 
 export const Navigation = () => {
@@ -35,6 +39,8 @@ export const Navigation = () => {
                 <Stack.Screen name='SurveyScreen' component={SurveyScreen} />
                 <Stack.Screen name='MainTabs' component={BottomTab} />
                 <Stack.Screen name='ProductDetailScreen' component={ProductDetailScreen} />
+                <Stack.Screen name='BasketScreen' component={BasketScreen} />
+                <Stack.Screen name='PurchaseScreen' component={PurchaseScreen} />
             </Stack.Navigator>
         </NavigationContainer>
 
