@@ -1,15 +1,8 @@
-import {
-  View,
-  Text,
-  TextInput,
-  FlatList,
-  Image,
-  TouchableOpacity,
-} from 'react-native';
+import { View, Text, FlatList, Image, TouchableOpacity } from 'react-native';
 import { useState } from 'react';
 import { ProductList } from '../../data/ProductList';
 import { useRootNavigation } from '../../navigation/Navigation';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import SearchInput from '../../components/SearchInput';
 
 const HomeScreen = () => {
   const [searchFocus, setSearchFocus] = useState(false);
@@ -24,37 +17,22 @@ const HomeScreen = () => {
   };
   return (
     <View className="flex-1">
-      <View className="flex-row  items-center">
-        <TextInput
-          placeholder="상품명을 검색해주세요."
-          className="border-[1px] border-blue-800 p-[8px] m-[8px] flex-1 rounded-[12px] h-[36px] bg-white"
-          value={search}
-          onChangeText={text => {
-            setSearch(text);
-            if (text.trim() === '') {
-              setFilteredProducts(ProductList);
-            }
-          }}
-          onFocus={() => setSearchFocus(true)}
-          onBlur={() => setSearchFocus(false)}
-        />
-        <TouchableOpacity
-          className="mx-[8px]"
-          onPress={() => navigation.navigate('BasketScreen')}
-        >
-          <Ionicons name="bag" size={24} color="black" />
-        </TouchableOpacity>
-        {searchFocus && (
-          <TouchableOpacity
-            className="mx-[4px]"
-            onPress={() => {
-              filterProducts();
-            }}
-          >
-            <Ionicons name="search" size={24} color="black" />
-          </TouchableOpacity>
-        )}
-      </View>
+      <SearchInput
+        placeholder="상품명을 검색해주세요."
+        value={search}
+        onChangeText={text => {
+          setSearch(text);
+          if (text.trim() === '') {
+            setFilteredProducts(ProductList);
+          }
+        }}
+        onFocus={() => setSearchFocus(true)}
+        onBlur={() => setSearchFocus(false)}
+        showCartButton={true}
+        onCartPress={() => navigation.navigate('BasketScreen')}
+        showSearchButton={searchFocus}
+        onSearchPress={filterProducts}
+      />
 
       <FlatList
         className="flex-1"

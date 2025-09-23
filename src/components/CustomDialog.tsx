@@ -6,6 +6,7 @@ interface CustomDialogProps {
   message: string;
   onConfirm: () => void;
   onCancel: () => void;
+  onCancelVisible?: boolean;
 }
 
 const CustomDialog = ({
@@ -14,6 +15,7 @@ const CustomDialog = ({
   message,
   onConfirm,
   onCancel,
+  onCancelVisible = true,
 }: CustomDialogProps) => {
   return (
     <Modal
@@ -31,22 +33,33 @@ const CustomDialog = ({
             {message}
           </Text>
 
-          <View className="flex-row space-x-[12px]">
-            <TouchableOpacity
-              onPress={onCancel}
-              className="flex-1 bg-gray-100 py-[12px] rounded-[8px]"
-            >
-              <Text className="text-center font-semibold text-gray-700">
-                취소
-              </Text>
-            </TouchableOpacity>
+          {onCancelVisible ? (
+            <View className="flex-row space-x-[12px]">
+              <TouchableOpacity
+                onPress={onCancel}
+                className="flex-1 bg-gray-100 py-[12px] rounded-[8px]"
+              >
+                <Text className="text-center font-semibold text-gray-700">
+                  취소
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={onConfirm}
+                className="flex-1 bg-blue-500 py-[12px] rounded-[8px]"
+              >
+                <Text className="text-center font-semibold text-white">
+                  확인
+                </Text>
+              </TouchableOpacity>
+            </View>
+          ) : (
             <TouchableOpacity
               onPress={onConfirm}
-              className="flex-1 bg-blue-500 py-[12px] rounded-[8px]"
+              className="w-full bg-blue-500 py-[12px] rounded-[8px]"
             >
               <Text className="text-center font-semibold text-white">확인</Text>
             </TouchableOpacity>
-          </View>
+          )}
         </View>
       </View>
     </Modal>

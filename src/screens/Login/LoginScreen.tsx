@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, Button, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { useRootNavigation } from '../../navigation/Navigation';
 import TextInputBox from '../../components/TextInputBox';
 import { useDialog } from '../../hooks/useDialog';

@@ -90,36 +90,33 @@ const BasketScreen = () => {
       <View className="flex-row justify-between items-start">
         <View className="flex-1 mr-3">
           <View className="flex-row">
-          <BouncyCheckbox
-                size={20}
-                fillColor="#3b82f6"
-                unFillColor="#FFFFFF"
-                iconStyle={{
-                  borderColor: '#3b82f6',
-                  borderRadius: 4,
-                  borderWidth: 2,
-                }}
-                innerIconStyle={{
-                  borderRadius: 4,
-                  borderWidth: 2,
-                }}
-                textStyle={{ display: 'none' }}
-                isChecked={selectedItems.includes(item.id)}
-                onPress={() => toggleItemSelection(item.id)}
-              />
-          <Text
-            className="text-lg font-semibold text-gray-800"
-            numberOfLines={2}
-          >
-            {item.name}
-          </Text>
-          
+            <BouncyCheckbox
+              size={20}
+              fillColor="#3b82f6"
+              unFillColor="#FFFFFF"
+              iconStyle={{
+                borderColor: '#3b82f6',
+                borderRadius: 4,
+                borderWidth: 2,
+              }}
+              innerIconStyle={{
+                borderRadius: 4,
+                borderWidth: 2,
+              }}
+              isChecked={selectedItems.includes(item.id)}
+              onPress={() => toggleItemSelection(item.id)}
+            />
+            <Text
+              className="text-lg font-semibold text-gray-800"
+              numberOfLines={2}
+            >
+              {item.name}
+            </Text>
           </View>
-     
+
           {/* 수량 조절 섹션 */}
           <View className="flex-row items-center justify-between mt-3">
             <View className="flex-row items-center">
-            
               <Text className="text-gray-600 mr-[4px] ml-[4px">수량:</Text>
               <View className="flex-row items-center border border-gray-300 rounded-[12px]">
                 <PlusMinusButton
@@ -152,14 +149,28 @@ const BasketScreen = () => {
 
   if (cart.length === 0) {
     return (
-      <View className="flex-1 justify-center items-center bg-gray-50">
-        <Ionicons name="cart-outline" size={80} color="#9ca3af" />
-        <Text className="text-xl font-semibold text-gray-600 mt-4">
-          장바구니가 비어있습니다
-        </Text>
-        <Text className="text-gray-500 mt-2 text-center px-8">
-          상품을 장바구니에 담고 주문해보세요
-        </Text>
+      <View className="flex-1 bg-gray-50">
+        {/* 헤더 */}
+        <View className="bg-white px-[16px] py-[12px] flex-row justify-between items-center border-b border-gray-200">
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Ionicons name="arrow-back" size={24} color="black" />
+          </TouchableOpacity>
+          <Text className="text-[16px] font-bold text-gray-800">
+            장바구니 (0개)
+          </Text>
+          <View style={{ width: 24 }} />
+        </View>
+
+        {/* 빈 장바구니 내용 */}
+        <View className="flex-1 justify-center items-center">
+          <Ionicons name="cart-outline" size={80} color="#9ca3af" />
+          <Text className="text-xl font-semibold text-gray-600 mt-4">
+            장바구니가 비어있습니다
+          </Text>
+          <Text className="text-gray-500 mt-2 text-center px-8">
+            상품을 장바구니에 담고 주문해보세요
+          </Text>
+        </View>
       </View>
     );
   }

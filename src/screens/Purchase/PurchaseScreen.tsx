@@ -33,6 +33,7 @@ const PurchaseScreen = () => {
         items.forEach(item => removeFromCart(item.id));
         navigation.navigate('MainTabs');
       },
+      onCancelVisible:false,
     });
   };
 

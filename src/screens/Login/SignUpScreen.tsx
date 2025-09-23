@@ -119,7 +119,8 @@ const SignUpScreen = () => {
           title: '회원가입 완료',
           message: '회원가입이 완료되었습니다!',
           onConfirm: () => navigation.navigate('LoginScreen'),
-          onCancel: () => navigation.navigate('LoginScreen')
+          onCancel: () => navigation.navigate('LoginScreen'),
+          onCancelVisible:false,
         });
       } else {
         Alert.alert('회원가입 실패', '회원가입 중 오류가 발생했습니다.');

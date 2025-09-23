@@ -7,7 +7,6 @@ interface TextInputBoxProps {
   value: string;
   onChangeText: (text: string) => void;
   secureTextEntry?: boolean;
-  label?: string;
 }
 
 const TextInputBox: React.FC<TextInputBoxProps> = ({ 
@@ -15,7 +14,6 @@ const TextInputBox: React.FC<TextInputBoxProps> = ({
   value, 
   onChangeText, 
   secureTextEntry = false,
-  label 
 }) => {
   // 텍스트 클리어 함수
   const handleClear = () => {

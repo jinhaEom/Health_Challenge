@@ -6,6 +6,7 @@ interface DialogConfig {
   message: string;
   onConfirm?: () => void;
   onCancel?: () => void;
+  onCancelVisible?: boolean;
 }
 
 export const useDialog = () => {
@@ -41,6 +42,7 @@ export const useDialog = () => {
       message={config.message}
       onConfirm={handleConfirm}
       onCancel={handleCancel}
+      onCancelVisible={config.onCancelVisible}
     />
   );
 
