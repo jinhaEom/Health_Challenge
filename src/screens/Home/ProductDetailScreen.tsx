@@ -129,7 +129,11 @@ const ProductInfoTab = ({ product }: { product: ProductInfo }) => {
         <View className="flex-row items-center justify-between mb-[16px]">
           <Text className="text-[24px] font-semibold">수량</Text>
           <View className="flex-row items-center">
-            <PlusMinusButton onDecrease={decreaseQuantity} onIncrease={increaseQuantity} quantity={quantity} />
+            <PlusMinusButton
+              onDecrease={decreaseQuantity}
+              onIncrease={increaseQuantity}
+              quantity={quantity}
+            />
           </View>
         </View>
 
@@ -152,7 +156,22 @@ const ProductInfoTab = ({ product }: { product: ProductInfo }) => {
             <Text className="ml-2 text-gray-600 font-semibold">장바구니</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity className="flex-1 bg-blue-500 py-[16px] rounded-[12px] justify-center items-center" onPress={() => navigation.navigate('PurchaseScreen', { id: product.id.toString(), quantity: quantity, price: product.price, name: product.name })}>
+          <TouchableOpacity
+            className="flex-1 bg-blue-500 py-[16px] rounded-[12px] justify-center items-center"
+            onPress={() =>
+              navigation.navigate('PurchaseScreen', {
+                items: [
+                  {
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    quantity: quantity,
+                  },
+                ],
+                totalPrice: product.price * quantity,
+              })
+            }
+          >
             <Text className="text-white font-bold text-lg">구매하기</Text>
           </TouchableOpacity>
         </View>

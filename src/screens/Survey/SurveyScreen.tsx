@@ -72,7 +72,7 @@ const SurveyScreen = () => {
 
             <View className="w-full">
               <Text className="text-[18px] font-semibold text-gray-800 mb-[16px]">상세 결과</Text>
-              {questions.map((question, index) => (
+              {questions.map((question) => (
                 <View key={question.id} className="bg-white border border-gray-200 rounded-[8px] p-[16px] mb-[12px]">
                   <Text className="text-[14px] text-gray-600 mb-[4px]">{question.question}</Text>
                   <Text className="text-base font-medium text-gray-800">
