@@ -29,13 +29,22 @@ const SearchInput: React.FC<SearchInputProps> = ({
     <View className="flex-row items-center">
       <TextInput
         placeholder={placeholder}
-        className="border-[1px] border-blue-800 p-[8px] m-[8px] flex-1 rounded-[12px] h-[36px] bg-white"
+        placeholderTextColor="#A0AEC0"
+        className="border-[1px] border-blue p-[8px] m-[8px] flex-1 rounded-[12px] h-[36px] bg-white"
         value={value}
         onChangeText={onChangeText}
         onFocus={onFocus}
         onBlur={onBlur}
         onSubmitEditing={onSearchPress}
         returnKeyType="search"
+        underlineColorAndroid="transparent"
+        selectionColor="blue"
+        style={{
+          fontSize: 14,
+          color: 'blue',
+          padding: 8,
+          margin: 8,
+        }}
       />
 
       {/* 장바구니 버튼 */}

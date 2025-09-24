@@ -39,7 +39,7 @@ const HomeScreen = () => {
         data={filteredProducts}
         renderItem={({ item }) => (
           <TouchableOpacity
-            className="m-2 p-4 border border-gray-200 rounded-lg bg-white"
+            className="m-2 p-4 border border-light-gray rounded-[12px] bg-white"
             onPress={() =>
               navigation.navigate('ProductDetailScreen', {
                 id: item.id.toString(),
@@ -51,7 +51,7 @@ const HomeScreen = () => {
               className="w-full h-48"
               resizeMode="contain"
             />
-            <Text className="text-base font-medium text-gray-800">
+            <Text className="text-base font-medium text-gray">
               {item.name}
             </Text>
             <Text className="text-[24px] text-gray-600 mt-1">
@@ -61,7 +61,7 @@ const HomeScreen = () => {
         )}
         ListEmptyComponent={
           <View className="flex-1 justify-center items-center">
-            <Text className="text-gray-600 ">검색결과가 없습니다.</Text>
+            <Text className="text-gray ">검색결과가 없습니다.</Text>
           </View>
         }
         keyExtractor={item => item.id.toString()}

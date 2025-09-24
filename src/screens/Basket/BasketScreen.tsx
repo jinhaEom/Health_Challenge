@@ -86,9 +86,9 @@ const BasketScreen = () => {
   };
 
   const renderCartItem = ({ item }: { item: CartItem }) => (
-    <View className="bg-white mx-4 mb-3 p-4 rounded-lg shadow-sm border border-gray-100">
+    <View className="bg-white mx-[16px] mb-[16px] p-[16px] rounded-[12px] shadow-sm border border-light-gray">
       <View className="flex-row justify-between items-start">
-        <View className="flex-1 mr-3">
+        <View className="flex-1 mr-[16px]">
           <View className="flex-row">
             <BouncyCheckbox
               size={20}
@@ -117,8 +117,8 @@ const BasketScreen = () => {
           {/* 수량 조절 섹션 */}
           <View className="flex-row items-center justify-between mt-3">
             <View className="flex-row items-center">
-              <Text className="text-gray-600 mr-[4px] ml-[4px">수량:</Text>
-              <View className="flex-row items-center border border-gray-300 rounded-[12px]">
+              <Text className="text-dark-gray mr-[4px] ml-[4px">수량:</Text>
+              <View className="flex-row items-center border border-light-gray rounded-[12px]">
                 <PlusMinusButton
                   onDecrease={() => updateQuantity(item.id, item.quantity - 1)}
                   onIncrease={() => updateQuantity(item.id, item.quantity + 1)}
@@ -135,10 +135,10 @@ const BasketScreen = () => {
           </View>
 
           <View className="mt-2">
-            <Text className="text-[16px] font-bold text-red-600">
+            <Text className="text-[16px] font-bold text-red">
               {(item.price * item.quantity).toLocaleString()}원
             </Text>
-            <Text className="text-[14px] text-gray-500">
+            <Text className="text-[14px] text-gray">
               (개당 {item.price.toLocaleString()}원)
             </Text>
           </View>
@@ -151,11 +151,11 @@ const BasketScreen = () => {
     return (
       <View className="flex-1 bg-gray-50">
         {/* 헤더 */}
-        <View className="bg-white px-[16px] py-[12px] flex-row justify-between items-center border-b border-gray-200">
+        <View className="bg-white px-[16px] py-[12px] flex-row justify-between items-center ">
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Ionicons name="arrow-back" size={24} color="black" />
           </TouchableOpacity>
-          <Text className="text-[16px] font-bold text-gray-800">
+          <Text className="text-[16px] font-bold text-gray">
             장바구니 (0개)
           </Text>
           <View style={{ width: 24 }} />
@@ -164,10 +164,10 @@ const BasketScreen = () => {
         {/* 빈 장바구니 내용 */}
         <View className="flex-1 justify-center items-center">
           <Ionicons name="cart-outline" size={80} color="#9ca3af" />
-          <Text className="text-xl font-semibold text-gray-600 mt-4">
+          <Text className="text-xl font-semibold text-gray mt-[4px]">
             장바구니가 비어있습니다
           </Text>
-          <Text className="text-gray-500 mt-2 text-center px-8">
+          <Text className="text-gray mt-[4px] text-center px-[8px]">
             상품을 장바구니에 담고 주문해보세요
           </Text>
         </View>
@@ -176,16 +176,16 @@ const BasketScreen = () => {
   }
 
   return (
-    <View className="flex-1 bg-gray-50">
-      <View className="bg-white px-[16px] py-[12px] flex-row justify-between items-center border-b border-gray-200">
+    <View className="flex-1 bg-background">
+      <View className="bg-white px-[16px] py-[12px] flex-row justify-between items-center border-b border-light-gray">
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionicons name="arrow-back" size={24} color="black" />
         </TouchableOpacity>
-        <Text className="text-[16px] font-bold text-gray-800">
+        <Text className="text-[16px] font-bold text-black">
           장바구니 ({cart.length}개)
         </Text>
         <TouchableOpacity onPress={handleRemoveSelectedItems}>
-          <Text className="text-[14px] text-red-500 font-medium">선택삭제</Text>
+          <Text className="text-[14px] text-red font-medium">선택삭제</Text>
         </TouchableOpacity>
       </View>
 
@@ -199,12 +199,12 @@ const BasketScreen = () => {
       />
 
       {/* 하단 결제 영역 */}
-      <View className="bg-white px-[16px] py-[16px] border-t border-gray-200">
+      <View className="bg-white px-[16px] py-[16px] border-t border-light-gray">
         <View className="flex-row justify-between items-center mb-[16px]">
-          <Text className="text-[16px] font-semibold text-gray-800">
+          <Text className="text-[16px] font-semibold text-gray">
             총 결제금액 ({selectedItems.length}개 선택)
           </Text>
-          <Text className="text-2xl font-bold text-red-600">
+          <Text className="text-2xl font-bold text-red">
             {totalPrice.toLocaleString()}원
           </Text>
         </View>
@@ -212,7 +212,7 @@ const BasketScreen = () => {
         <TouchableOpacity
           onPress={handleOrder}
           className={`py-[16px] rounded-[12px] ${
-            selectedItems.length > 0 ? 'bg-blue-500' : 'bg-gray-300'
+            selectedItems.length > 0 ? 'bg-light-blue' : 'bg-gray'
           }`}
           disabled={selectedItems.length === 0}
         >

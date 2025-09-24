@@ -133,16 +133,16 @@ const SignUpScreen = () => {
   };
 
   return (
-    <View className="flex-1 bg-gray-50">
+    <View className="flex-1 bg-background">
       <ScrollView showsVerticalScrollIndicator={false}>
         <View className="px-[12px] pt-[60px]">
-          <Text className="text-[32px] font-bold text-blue-800 text-center mb-[8px]">
+          <Text className="text-[32px] font-bold text-blue text-center mb-[8px]">
             회원가입
           </Text>
 
 
           <View className="mb-[32px]">
-            <Text className="text-[16px] font-semibold text-gray-700 mb-[8px] ml-[4px]">
+            <Text className="text-[16px] font-semibold text-gray mb-[8px] ml-[4px]">
               아이디
             </Text>
             <TextInputBox
@@ -152,12 +152,12 @@ const SignUpScreen = () => {
 
             />
             {errors.username && (
-              <Text className="text-red-500 text-[12px] ml-[4px] mt-[4px]">
+              <Text className="text-red text-[12px] ml-[4px] mt-[4px]">
                 {errors.username}
               </Text>
             )}
 
-            <Text className="text-[16px] font-semibold text-gray-700 mb-[8px] ml-[4px] mt-[20px]">
+            <Text className="text-[16px] font-semibold text-gray mb-[8px] ml-[4px] mt-[20px]">
               이메일
             </Text>
             <TextInputBox
@@ -166,12 +166,12 @@ const SignUpScreen = () => {
               onChangeText={(text) => updateFormData('email', text)}
             />
             {errors.email && (
-              <Text className="text-red-500 text-[12px] ml-[4px] mt-[4px]">
+              <Text className="text-red text-[12px] ml-[4px] mt-[4px]">
                 {errors.email}
               </Text>
             )}
 
-            <Text className="text-[16px] font-semibold text-gray-700 mb-[8px] ml-[4px] mt-[20px]">
+            <Text className="text-[16px] font-semibold text-gray mb-[8px] ml-[4px] mt-[20px]">
               비밀번호
             </Text>
             <TextInputBox
@@ -181,12 +181,12 @@ const SignUpScreen = () => {
               secureTextEntry
             />
             {errors.password && (
-              <Text className="text-red-500 text-[12px] ml-[4px] mt-[4px]">
+              <Text className="text-red text-[12px] ml-[4px] mt-[4px]">
                 {errors.password}
               </Text>
             )}
 
-            <Text className="text-[16px] font-semibold text-gray-700 mb-[8px] ml-[4px] mt-[20px]">
+            <Text className="text-[16px] font-semibold text-gray mb-[8px] ml-[4px] mt-[20px]">
               비밀번호 확인
             </Text>
             <TextInputBox
@@ -196,12 +196,12 @@ const SignUpScreen = () => {
               secureTextEntry
             />
             {errors.confirmPassword && (
-              <Text className="text-red-500 text-[12px] ml-[4px] mt-[4px]">
+              <Text className="text-red text-[12px] ml-[4px] mt-[4px]">
                 {errors.confirmPassword}
               </Text>
             )}
 
-            <Text className="text-[16px] font-semibold text-gray-700 mb-[8px] ml-[4px] mt-[20px]">
+            <Text className="text-[16px] font-semibold text-gray mb-[8px] ml-[4px] mt-[20px]">
               이름
             </Text>
             <TextInputBox
@@ -210,12 +210,12 @@ const SignUpScreen = () => {
               onChangeText={(text) => updateFormData('name', text)}
             />
             {errors.name && (
-              <Text className="text-red-500 text-[12px] ml-[4px] mt-[4px]">
+              <Text className="text-red text-[12px] ml-[4px] mt-[4px]">
                 {errors.name}
               </Text>
             )}
 
-            <Text className="text-[16px] font-semibold text-gray-700 mb-[8px] ml-[4px] mt-[20px]">
+            <Text className="text-[16px] font-semibold text-gray mb-[8px] ml-[4px] mt-[20px]">
               핸드폰 번호
             </Text>
             <TextInputBox
@@ -224,14 +224,14 @@ const SignUpScreen = () => {
               onChangeText={(text) => updateFormData('phoneNumber', text)}
             />
             {errors.phoneNumber && (
-              <Text className="text-red-500 text-[12px] ml-[4px] mt-[4px]">
+              <Text className="text-red text-[12px] ml-[4px] mt-[4px]">
                 {errors.phoneNumber}
               </Text>
             )}
           </View>
 
           <TouchableOpacity
-            className={`rounded-[12px] py-[16px] mb-[16px] ${isLoading ? 'bg-gray-400' : 'bg-blue-800'
+            className={`rounded-[12px] py-[16px] mb-[16px] ${isLoading ? 'bg-gray' : 'bg-blue'
               }`}
             onPress={handleSignUp}
             disabled={isLoading}
@@ -242,10 +242,10 @@ const SignUpScreen = () => {
           </TouchableOpacity>
 
           <TouchableOpacity
-            className="bg-white rounded-[12px] py-[16px] border border-blue-800 mb-[40px]"
+            className="bg-white rounded-[12px] py-[16px] border border-blue mb-[40px]"
             onPress={() => navigation.navigate('LoginScreen')}
           >
-            <Text className="text-blue-800 text-[16px] font-semibold text-center">
+            <Text className="text-blue text-[16px] font-semibold text-center">
               이미 계정이 있으신가요? 로그인
             </Text>
           </TouchableOpacity>

@@ -55,7 +55,7 @@ const ImageSlider = ({ images }: { images: string[] }) => {
           <View
             key={index}
             className={`w-[8px] h-[8px] rounded-full mx-[4px] ${
-              index === currentIndex ? 'bg-blue-500' : 'bg-gray-300'
+              index === currentIndex ? 'bg-blue' : 'bg-gray'
             }`}
           />
         ))}
@@ -119,12 +119,12 @@ const ProductInfoTab = ({ product }: { product: ProductInfo }) => {
     <View className="flex-1">
       <ScrollView className="flex-1 p-[16px]">
         <Text className="text-[20px] font-bold mb-[4px]">{product?.name}</Text>
-        <Text className="text-lg text-red-600 font-semibold">
+        <Text className="text-[18px] text-red font-semibold">
           {product?.price?.toLocaleString()}원
         </Text>
       </ScrollView>
 
-      <View className="p-[16px] border-t border-gray-200 bg-white">
+      <View className="p-[16px] border-t border-light-gray   bg-white">
         {/* 수량 조절 */}
         <View className="flex-row items-center justify-between mb-[16px]">
           <Text className="text-[24px] font-semibold">수량</Text>
@@ -140,7 +140,7 @@ const ProductInfoTab = ({ product }: { product: ProductInfo }) => {
         {/* 총 금액  */}
         <View className="flex-row items-center justify-between mb-[16px]">
           <Text className="text-[16px] font-semibold">총 금액</Text>
-          <Text className="text-[24px] font-bold text-red-600">
+          <Text className="text-[24px] font-bold text-red">
             {totalPrice.toLocaleString()}원
           </Text>
         </View>
@@ -148,16 +148,16 @@ const ProductInfoTab = ({ product }: { product: ProductInfo }) => {
         <View className="flex-row space-x-[16px]">
           <TouchableOpacity
             onPress={handleAddToCart}
-            className="flex-1 bg-gray-100 py-[16px] rounded-[12px] flex-row justify-center items-center"
+            className="flex-1 bg-light-gray py-[16px] rounded-[12px] flex-row justify-center items-center"
           >
             <Animated.View style={{ transform: [{ scale: animatedValue }] }}>
               <Ionicons name="cart-outline" size={20} color="#666" />
             </Animated.View>
-            <Text className="ml-2 text-gray-600 font-semibold">장바구니</Text>
+            <Text className="ml-[4px] text-gray font-semibold">장바구니</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
-            className="flex-1 bg-blue-500 py-[16px] rounded-[12px] justify-center items-center"
+            className="flex-1 bg-light-blue py-[16px] rounded-[12px] justify-center items-center"
             onPress={() =>
               navigation.navigate('PurchaseScreen', {
                 items: [
@@ -172,7 +172,7 @@ const ProductInfoTab = ({ product }: { product: ProductInfo }) => {
               })
             }
           >
-            <Text className="text-white font-bold text-lg">구매하기</Text>
+            <Text className="text-white font-bold text-[16px]">구매하기</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -186,20 +186,20 @@ const ReviewTab = ({ product }: { product: ProductInfo }) => {
       {product?.ProductReview?.map((review: ProductReview) => (
         <View key={review.id} className="mb-4 p-4 bg-gray-50 rounded-[12px]">
           <View className="flex-row items-center mb-2">
-            <Text className="font-semibold text-blue-600">
+            <Text className="font-semibold text-blue">
               {review.reviewer}
             </Text>
-            <Text className="ml-[4px] text-yellow-500">
+            <Text className="ml-[4px] text-yellow">
               {'★'.repeat(parseInt(review.score, 10))}
               {'☆'.repeat(5 - parseInt(review.score, 10))}
             </Text>
-            <Text className="ml-auto text-gray-500 text-[12px]">
+            <Text className="ml-auto text-gray text-[12px]">
               {review.date}
             </Text>
           </View>
-          <Text className="text-gray-800">{review.content}</Text>
+          <Text className="text-gray">{review.content}</Text>
         </View>
-      )) || <Text className="text-gray-500">리뷰가 없습니다.</Text>}
+      )) || <Text className="text-gray">리뷰가 없습니다.</Text>}
     </ScrollView>
   );
 };
@@ -207,7 +207,7 @@ const ReviewTab = ({ product }: { product: ProductInfo }) => {
 // 상품 설명 탭
 const ProductDescriptionTab = ({ product }: { product: ProductInfo }) => {
   return (
-    <ScrollView className="flex-1 p-4">
+    <ScrollView className="flex-1 p-[16px]">
       <Text className="text-[16px]">{product?.description}</Text>
     </ScrollView>
   );

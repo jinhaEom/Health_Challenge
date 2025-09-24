@@ -35,13 +35,13 @@ const OrderListScreen = () => {
     setFilteredOrders(filtered);
   };
   const renderOrderItem = ({ item }: { item: Order }) => (
-    <View className="bg-white mx-[16px] mb-[12px] p-[16px] rounded-[12px] shadow-sm border border-gray-100">
+    <View className="bg-white mx-[16px] mb-[12px] p-[16px] rounded-[12px] shadow-sm border border-light-gray">
       <View className="flex-row justify-between items-start mb-[12px]">
         <View>
-          <Text className="text-[14px] font-semibold text-gray-800 mb-[4px]">
+          <Text className="text-[14px] font-semibold text-dark-gray mb-[4px]">
             주문번호: {item.id}
           </Text>
-          <Text className="text-[12px] text-gray-500">
+          <Text className="text-[12px] text-dark-gray">
             주문날짜: {formatDate(item.orderDate)} {formatTime(item.orderDate)}
           </Text>
         </View>
@@ -68,21 +68,21 @@ const OrderListScreen = () => {
       {item.items.map((orderItem, index) => (
         <View
           key={index}
-          className="border-b border-gray-100 pb-[8px] mb-[8px] last:border-b-0 last:pb-0 last:mb-0"
+          className="pb-[8px] mb-[8px]"
         >
           <Text
-            className="text-base font-semibold text-gray-800"
+            className="text-base font-semibold text-dark-gray"
             numberOfLines={2}
           >
             {orderItem.name}
           </Text>
           <View className="flex-row justify-between items-center mt-[8px]">
-            <Text className="text-[12px] text-gray-600">
+            <Text className="text-[12px] text-dark-gray">
               수량: {orderItem.quantity}개
             </Text>
             <View className="flex-row items-center">
               <Text className="text-[12px] text-black">개당 : </Text>
-              <Text className="text-[12px] text-red-600 font-semibold">
+              <Text className="text-[12px] text-red font-semibold">
                 {(orderItem.price * orderItem.quantity).toLocaleString()}원
               </Text>
             </View>
@@ -91,9 +91,9 @@ const OrderListScreen = () => {
       ))}
 
       {/* 총 금액 */}
-      <View className="flex-row justify-between items-center mt-[12px] pt-[12px] border-t border-gray-200">
-        <Text className="text-[16px] font-bold text-gray-800">총 결제금액</Text>
-        <Text className="text-[16px] font-bold text-red-600">
+      <View className="flex-row justify-between items-center mt-[12px] pt-[12px] border-t border-light-gray">
+        <Text className="text-[16px] font-bold text-dark-gray">총 결제금액</Text>
+        <Text className="text-[16px] font-bold text-red">
           {item.totalPrice.toLocaleString()}원
         </Text>
       </View>
@@ -102,9 +102,9 @@ const OrderListScreen = () => {
 
   if (orders.length === 0) {
     return (
-      <View className="flex-1 bg-gray-50">
+      <View className="flex-1 bg-background">
         {/* 헤더 */}
-        <View className="bg-white px-[16px] py-[12px] border-b border-gray-200">
+        <View className="bg-white px-[16px] py-[12px] border-b border-light-gray">
           <Text className="text-[16px] font-bold text-gray-800">
             주문 내역 (0건)
           </Text>
@@ -128,10 +128,10 @@ const OrderListScreen = () => {
         {/* 빈 주문 내역 */}
         <View className="flex-1 justify-center items-center">
           <Ionicons name="receipt-outline" size={80} color="#9ca3af" />
-          <Text className="text-[16px] font-semibold text-gray-600 mt-[16px]">
+          <Text className="text-[16px] font-semibold text-dark-gray mt-[16px]">
             주문 내역이 없습니다
           </Text>
-          <Text className="text-[12px] text-gray-500 mt-[8px] text-center px-[8px]">
+          <Text className="text-[12px] text-dark-gray mt-[8px] text-center px-[8px]">
             상품을 주문하면 여기에서 확인할 수 있습니다
           </Text>
         </View>
@@ -140,10 +140,10 @@ const OrderListScreen = () => {
   }
 
   return (
-    <View className="flex-1 bg-gray-50">
+    <View className="flex-1 bg-background">
       {/* 헤더 */}
-      <View className="bg-white px-[16px] py-[12px] border-b border-gray-200">
-        <Text className="text-lg font-bold text-gray-800">
+      <View className="bg-white px-[16px] py-[12px] border-b border-light-gray">
+        <Text className="text-lg font-bold text-dark-gray">
           주문 내역 ({filteredOrders.length}건)
         </Text>
         <SearchInput
@@ -173,10 +173,10 @@ const OrderListScreen = () => {
         ListEmptyComponent={
           <View className="flex-1 justify-center items-center">
             <Ionicons name="search-outline" size={80} color="#9ca3af" />
-            <Text className="text-[16px] font-semibold text-gray-600 mt-[16px]">
+            <Text className="text-[16px] font-semibold text-dark-gray mt-[16px]">
               검색 결과가 없습니다
             </Text>
-            <Text className="text-[12px] text-gray-500 mt-[8px] text-center px-[8px]">
+            <Text className="text-[12px] text-dark-gray mt-[8px] text-center px-[8px]">
               다른 검색어로 다시 시도해보세요
             </Text>
           </View>

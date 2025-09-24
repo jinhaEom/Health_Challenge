@@ -24,7 +24,7 @@ const CustomDialog = ({
       animationType="fade"
       onRequestClose={onCancel}
     >
-      <View className="flex-1 justify-center items-center bg-black/50">
+      <View className="flex-1 justify-center items-center bg-black/50"> 
         <View className="bg-white p-[24px] rounded-[12px] border border-gray-200 mx-[32px] w-[300px]">
           <Text className="text-[18px] font-bold mb-[8px] text-center">
             {title}
@@ -37,15 +37,15 @@ const CustomDialog = ({
             <View className="flex-row space-x-[12px]">
               <TouchableOpacity
                 onPress={onCancel}
-                className="flex-1 bg-gray-100 py-[12px] rounded-[8px]"
+                className="flex-1 bg-light-gray py-[12px] rounded-[8px]"
               >
-                <Text className="text-center font-semibold text-gray-700">
+                <Text className="text-center font-semibold text-dark-gray">
                   취소
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={onConfirm}
-                className="flex-1 bg-blue-500 py-[12px] rounded-[8px]"
+                className="flex-1 bg-light-blue py-[12px] rounded-[8px]"
               >
                 <Text className="text-center font-semibold text-white">
                   확인
@@ -55,7 +55,7 @@ const CustomDialog = ({
           ) : (
             <TouchableOpacity
               onPress={onConfirm}
-              className="w-full bg-blue-500 py-[12px] rounded-[8px]"
+              className="w-full bg-light-blue py-[12px] rounded-[8px]"
             >
               <Text className="text-center font-semibold text-white">확인</Text>
             </TouchableOpacity>

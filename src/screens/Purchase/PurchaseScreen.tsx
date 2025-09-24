@@ -38,13 +38,13 @@ const PurchaseScreen = () => {
   };
 
   return (
-    <View className="flex-1 bg-gray-50">
+    <View className="flex-1 bg-background">
       {/* 헤더 */}
-      <View className="bg-white px-4 py-3 flex-row items-center border-b border-gray-200">
+      <View className="bg-white px-[16px] py-[12px] flex-row items-center border-b border-light-gray">
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionicons name="arrow-back" size={24} color="black" />
         </TouchableOpacity>
-        <Text className="ml-[16px] text-[16px] font-bold text-gray-800">
+        <Text className="ml-[16px] text-[16px] font-bold text-dark-gray  ">
           결제하기
         </Text>
       </View>
@@ -52,7 +52,7 @@ const PurchaseScreen = () => {
       <ScrollView className="flex-1">
         {/* 주문 정보 */}
         <View className="bg-white mx-[16px] mt-[16px] p-[16px] rounded-[12px] shadow-sm">
-          <Text className="text-[16px] font-bold text-gray-800 mb-[8px]">
+          <Text className="text-[16px] font-bold text-dark-gray mb-[8px]">
             주문 상품 ({items.length}개)
           </Text>
 
@@ -60,35 +60,35 @@ const PurchaseScreen = () => {
             <View
               key={item.id}
               className={`${
-                index > 0 ? 'border-t border-gray-200 pt-[12px]' : ''
+                index > 0 ? 'border-t border-light-gray pt-[12px]' : ''
               } ${
                 index < items.length - 1
-                  ? 'border-b border-gray-200 pb-[12px]'
+                  ? 'border-b border-light-gray pb-[12px]'
                   : ''
               } ${index > 0 && index < items.length - 1 ? 'py-[12px]' : ''}`}
             >
               <Text
-                className="text-[14px] font-semibold text-gray-700"
+                className="text-[14px] font-semibold text-gray"
                 numberOfLines={2}
               >
                 {item.name}
               </Text>
               <View className="flex-row justify-between items-center mt-[8px]">
-                <Text className="text-[12px] text-gray-600">
+                <Text className="text-[12px] text-dark-gray">
                   수량: {item.quantity}개
                 </Text>
-                <Text className="text-red-600 font-semibold">
+                <Text className="text-red font-semibold">
                   {(item.price * item.quantity).toLocaleString()}원
                 </Text>
               </View>
             </View>
           ))}
 
-          <View className="flex-row justify-between items-center mt-[12px] pt-[12px] border-t border-gray-300">
-            <Text className="text-[16px] font-bold text-gray-800">
+          <View className="flex-row justify-between items-center mt-[12px] pt-[12px] border-t border-light-gray">
+            <Text className="text-[16px] font-bold text-dark-gray">
               총 결제금액
             </Text>
-            <Text className="text-[24px] font-bold text-red-600">
+            <Text className="text-[24px] font-bold text-red">
               {totalPrice.toLocaleString()}원
             </Text>
           </View>
@@ -100,9 +100,9 @@ const PurchaseScreen = () => {
             결제 방법
           </Text>
 
-          <View className="flex-row items-center p-[12px] border border-blue-300 rounded-[12px] bg-blue-50">
+          <View className="flex-row items-center p-[12px] border border-light-blue rounded-[12px] bg-lighest-blue">
             <Ionicons name="card" size={24} color="#3b82f6" />
-            <Text className="ml-[12px] text-[16px] text-blue-700 font-semibold">
+            <Text className="ml-[12px] text-[16px] text-blue font-semibold">
               신용카드
             </Text>
           </View>
@@ -110,32 +110,32 @@ const PurchaseScreen = () => {
 
         {/* 주문자 정보 */}
         <View className="bg-white mx-[16px] mt-[16px] p-[16px] rounded-[12px] shadow-sm">
-          <Text className="text-[16px] font-bold text-gray-800 mb-[8px]">
+          <Text className="text-[16px] font-bold text-dark-gray mb-[8px]">
             주문자 정보
           </Text>
 
           <View className="space-y-[8px]">
             <View className="flex-row">
-              <Text className="text-gray-600 w-[80px]">이름:</Text>
-              <Text className="text-gray-800">엄진하</Text>
+              <Text className="text-gray w-[80px]">이름:</Text>
+              <Text className="text-dark-gray">엄진하</Text>
             </View>
             <View className="flex-row">
-              <Text className="text-gray-600 w-[80px]">연락처:</Text>
-              <Text className="text-gray-800">010-1234-5678</Text>
+              <Text className="text-gray w-[80px]">연락처:</Text>
+              <Text className="text-dark-gray">010-1234-5678</Text>
             </View>
             <View className="flex-row">
-              <Text className="text-gray-600 w-[80px]">이메일:</Text>
-              <Text className="text-gray-800">test@naver.com</Text>
+              <Text className="text-gray w-[80px]">이메일:</Text>
+              <Text className="text-dark-gray">test@naver.com</Text>
             </View>
           </View>
         </View>
       </ScrollView>
 
       {/* 하단 결제 버튼 */}
-      <View className="bg-white px-[16px] py-[16px] border-t border-gray-200">
+      <View className="bg-white px-[16px] py-[16px] border-t border-light-gray">
         <TouchableOpacity
           onPress={handlePurchase}
-          className="bg-blue-500 py-[16px] rounded-[12px]"
+          className="bg-light-blue py-[16px] rounded-[12px]"
         >
           <Text className="text-white text-[16px] font-bold text-center">
             {totalPrice.toLocaleString()}원 결제하기

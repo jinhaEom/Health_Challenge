@@ -9,10 +9,10 @@ interface TextInputBoxProps {
   secureTextEntry?: boolean;
 }
 
-const TextInputBox: React.FC<TextInputBoxProps> = ({ 
-  placeholder, 
-  value, 
-  onChangeText, 
+const TextInputBox: React.FC<TextInputBoxProps> = ({
+  placeholder,
+  value,
+  onChangeText,
   secureTextEntry = false,
 }) => {
   // 텍스트 클리어 함수
@@ -22,25 +22,32 @@ const TextInputBox: React.FC<TextInputBoxProps> = ({
 
   return (
     <View className="my-[8px] mx-[16px]">
-      
-      <View className="flex-row items-center bg-white border-2 border-blue-800 rounded-[12px] px-[16px] py-[12px] h-[50px]">
+      <View className="flex-row items-center bg-white border-2 border-blue rounded-[12px] px-[16px] py-[12px] h-[50px]">
         <TextInput
-          className="flex-1 text-blue-800"
+          className="flex-1 text-blue"
           placeholder={placeholder}
           placeholderTextColor="#A0AEC0"
           value={value}
           onChangeText={onChangeText}
           secureTextEntry={secureTextEntry}
+          underlineColorAndroid="transparent"
+          selectionColor="#1e40af"
+          style={{
+            fontSize: 16,
+            color: 'blue',
+            padding: 0,
+            margin: 0,
+          }}
         />
-        
+
         {/* 텍스트가 있을 때만 X 버튼 표시 */}
         {value.length > 0 && (
-          <TouchableOpacity 
+          <TouchableOpacity
             className="center"
             onPress={handleClear}
             activeOpacity={0.7}
           >
-            <Text className="text-lg text-blue-800 font-bold">✕</Text>
+            <Text className="text-lg text-blue font-bold">✕</Text>
           </TouchableOpacity>
         )}
       </View>

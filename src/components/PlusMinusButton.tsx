@@ -17,20 +17,20 @@ const PlusMinusButton: React.FC<PlusMinusButtonProps> = ({
     <View className="flex-row">
       <TouchableOpacity
         onPress={onDecrease}
-        className="w-[42px] h-[42px] border border-gray-300 rounded-l-lg justify-center items-center"
+        className="w-[32px] h-[32px] border border-gray rounded-l-[12px] justify-center items-center"
       >
-        <Ionicons name="remove" size={20} color="#666" />
+        <Ionicons name="remove" size={20} color="gray" />
       </TouchableOpacity>
 
-      <View className="w-[42px] h-[42px] border-t border-b border-gray-300 justify-center items-center">
+      <View className="w-[32px] h-[32px] border-t border-b border-gray justify-center items-center">
         <Text className="text-lg font-semibold">{quantity}</Text>
       </View>
 
       <TouchableOpacity
         onPress={onIncrease}
-        className="w-[42px] h-[42px] border border-gray-300 rounded-r-lg justify-center items-center"
+        className="w-[32px] h-[32px] border border-gray rounded-r-[12px] justify-center items-center"
       >
-        <Ionicons name="add" size={20} color="#666" />
+        <Ionicons name="add" size={20} color="gray" />
       </TouchableOpacity>
     </View>
   );

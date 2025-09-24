@@ -40,7 +40,8 @@ const LoginScreen = () => {
           title: '로그인 성공',
           message: `${VALID_ACCOUNT.name}님, 환영합니다!`,
           onConfirm: () => navigation.navigate('SurveyScreen'),
-          onCancel: () => { }
+          onCancel: () => { },
+          onCancelVisible: false,
         });
       } else {
         // 로그인 실패
@@ -55,21 +56,21 @@ const LoginScreen = () => {
     }, 1000);
   };
   return (
-    <View className="flex-1 bg-gray-50">
-      <Text className='text-[28px] font-bold text-blue-800 text-center my-[100px]'>HealthChallenge</Text>
+    <View className="flex-1 bg-background">
+      <Text className='text-[28px] font-bold text-blue text-center my-[100px]'>HealthChallenge</Text>
 
       <TextInputBox placeholder='Email' value={email} onChangeText={setEmail} secureTextEntry={false} />
       <TextInputBox placeholder='Password' value={password} onChangeText={setPassword} secureTextEntry={true} />
 
       <View className="mx-[16px] flex-1 justify-end">
         <TouchableOpacity onPress={() => navigation.navigate('SignUpScreen')}>
-          <Text className='text-blue-800 text-center font-[12px]'>Sign Up</Text>
+          <Text className='text-blue text-center font-[12px]'>Sign Up</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          className={`rounded-[12px] p-[16px] mt-[16px] ${isLoading ? 'bg-gray-400' : 'bg-blue-800'
+          className={`rounded-[12px] p-[16px] mt-[16px] ${isLoading ? 'bg-gray' : 'bg-blue'
             }`}
-          // onPress={handleLogin}
-          onPress={() => navigation.navigate('MainTabs')}
+          onPress={handleLogin}
+          // onPress={() => navigation.navigate('MainTabs')}
           disabled={isLoading}
         >
 

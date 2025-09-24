@@ -90,54 +90,54 @@ const MyProfileScreen = () => {
   return (
     <View className="flex-1 bg-gray-50">
       {/* 헤더 */}
-      <View className="bg-white px-[16px] py-[12px] flex-row justify-between items-center border-b border-gray-200">
+      <View className="bg-white px-[16px] py-[12px] flex-row justify-between items-center border-b border-light-gray">
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionicons name="arrow-back" size={24} color="black" />
         </TouchableOpacity>
-        <Text className="text-lg font-bold text-gray-800">내 프로필</Text>
+        <Text className="text-[16px] font-bold text-dark-gray">내 프로필</Text>
         <View style={{ width: 24 }} />
       </View>
 
       <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
         {/* 프로필 정보 섹션 */}
-        <View className="bg-white mx-[16px] mt-[16px] rounded-lg shadow-sm border border-gray-100">
-          <View className="p-[16px] border-b border-gray-100">
-            <Text className="text-[16px] font-semibold text-gray-800 mb-[16px]">
+        <View className="bg-white mx-[16px] mt-[16px] rounded-[12px] shadow-sm border border-light-gray">
+          <View className="p-[16px]">
+            <Text className="text-[16px] font-semibold text-dark-gray mb-[16px]">
               기본 정보
             </Text>
 
             {/* 이름 */}
             <View className="mb-[16px]">
-              <Text className="text-[12px] text-gray-600 mb-[8px]">이름</Text>
+              <Text className="text-[12px] text-dark-gray mb-[8px]">이름</Text>
               {isEditing ? (
                 <View className="flex-row items-center">
                   <TextInput
-                    className="flex-1 border border-gray-300 rounded-lg px-[16px] py-[12px] text-gray-800"
+                    className="flex-1 border border-gray rounded-[12px] px-[16px] py-[12px] text-dark-gray"
                     value={editedName}
                     onChangeText={setEditedName}
                     placeholder="이름을 입력하세요"
                   />
                   <TouchableOpacity
                     onPress={handleSaveProfile}
-                    className="ml-2 bg-blue-500 px-[16px] py-[12px] rounded-lg"
+                    className="ml-[4px] bg-light-blue px-[16px] py-[12px] rounded-[12px]"
                   >
                     <Text className="text-white font-medium">저장</Text>
                   </TouchableOpacity>
                   <TouchableOpacity
                     onPress={handleCancelEdit}
-                    className="ml-2 bg-gray-500 px-[16px] py-[12px] rounded-lg"
+                    className="ml-[4px] bg-gray px-[16px] py-[12px] rounded-[12px]"
                   >
                     <Text className="text-white font-medium">취소</Text>
                   </TouchableOpacity>
                 </View>
               ) : (
                 <View className="flex-row justify-between items-center">
-                  <Text className="text-gray-800 text-[16px]">
+                  <Text className="text-dark-gray text-[16px]">
                     {userInfo.name}
                   </Text>
                   <TouchableOpacity
                     onPress={handleEditProfile}
-                    className="bg-blue-500 px-[16px] py-[12px] rounded-lg"
+                    className="bg-light-blue px-[16px] py-[12px] rounded-[12px]"
                   >
                     <Text className="text-white text-[12px] font-medium">
                       수정
@@ -149,18 +149,18 @@ const MyProfileScreen = () => {
 
             {/* 이메일 */}
             <View className="mb-[16px]">
-              <Text className="text-[12px] text-gray-600 mb-[8px]">이메일</Text>
-              <Text className="text-gray-800 text-[16px]">
+              <Text className="text-[12px] text-dark-gray mb-[8px]">이메일</Text>
+              <Text className="text-dark-gray text-[16px]">
                 {userInfo.email}
               </Text>
             </View>
 
             {/* 전화번호 */}
             <View>
-              <Text className="text-[12px] text-gray-600 mb-[8px]">
+              <Text className="text-[12px] text-dark-gray mb-[8px]">
                 전화번호
               </Text>
-              <Text className="text-gray-800 text-[16px]">
+              <Text className="text-dark-gray text-[16px]">
                 {userInfo.phoneNumber}
               </Text>
             </View>
@@ -168,20 +168,20 @@ const MyProfileScreen = () => {
         </View>
 
         {/* 계정 관리 */}
-        <View className="bg-white mx-[16px] mt-[16px] rounded-lg shadow-sm border border-gray-100">
+        <View className="bg-white mx-[16px] mt-[16px] rounded-[12px] shadow-sm border border-light-gray">
           <View className="p-[16px]">
-            <Text className="text-[16px] font-semibold text-gray-800 mb-[16px]">
+            <Text className="text-[16px] font-semibold text-gray mb-[16px]">
               계정 관리
             </Text>
 
             {/* 로그아웃 */}
             <TouchableOpacity
               onPress={handleLogout}
-              className="flex-row items-center justify-between py-[16px] border-b border-gray-100"
+              className="flex-row items-center justify-between py-[16px]"
             >
               <View className="flex-row items-center">
                 <Ionicons name="log-out-outline" size={20} color="#6b7280" />
-                <Text className="text-gray-800 text-[16px] ml-[16px]">
+                <Text className="text-dark-gray text-[16px] ml-[16px]">
                   로그아웃
                 </Text>
               </View>
@@ -199,7 +199,7 @@ const MyProfileScreen = () => {
                   size={20}
                   color="#ef4444"
                 />
-                <Text className="text-red-500 text-[16px] ml-[16px]">
+                <Text className="text-red text-[16px] ml-[16px]">
                   회원 탈퇴
                 </Text>
               </View>
@@ -209,15 +209,15 @@ const MyProfileScreen = () => {
         </View>
 
         {/* 앱 정보 섹션 */}
-        <View className="bg-white mx-[16px] mt-[16px] mb-[24px] rounded-lg shadow-sm border border-gray-100">
+        <View className="bg-white mx-[16px] mt-[16px] mb-[24px] rounded-[12px] shadow-sm border border-light-gray">
           <View className="p-[16px]">
-            <Text className="text-[16px] font-semibold text-gray-800 mb-[16px]">
+            <Text className="text-[16px] font-semibold text-gray mb-[16px]">
               앱 정보
             </Text>
 
             <View className="flex-row justify-between items-center py-[16px]">
-              <Text className="text-gray-600 text-[16px]">앱 버전</Text>
-              <Text className="text-gray-800 text-[16px]">1.0.0</Text>
+              <Text className="text-gray text-[16px]">앱 버전</Text>
+              <Text className="text-gray text-[16px]">1.0.0</Text>
             </View>
           </View>
         </View>
