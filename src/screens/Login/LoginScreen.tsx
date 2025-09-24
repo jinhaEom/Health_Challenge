@@ -69,8 +69,8 @@ const LoginScreen = () => {
         <TouchableOpacity
           className={`rounded-[12px] p-[16px] mt-[16px] ${isLoading ? 'bg-gray' : 'bg-blue'
             }`}
-          onPress={handleLogin}
-          // onPress={() => navigation.navigate('MainTabs')}
+          // onPress={handleLogin}
+          onPress={() => navigation.navigate('MainTabs')}
           disabled={isLoading}
         >
 
