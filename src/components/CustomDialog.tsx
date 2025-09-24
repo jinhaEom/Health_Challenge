@@ -25,7 +25,7 @@ const CustomDialog = ({
       onRequestClose={onCancel}
     >
       <View className="flex-1 justify-center items-center bg-black/50"> 
-        <View className="bg-white p-[24px] rounded-[12px] border border-gray-200 mx-[32px] w-[300px]">
+        <View className="bg-white p-[24px] rounded-[12px] border border-light-gray mx-[32px] w-[300px]">
           <Text className="text-[18px] font-bold mb-[8px] text-center">
             {title}
           </Text>
