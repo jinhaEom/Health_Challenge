@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import { useRootNavigation } from '../../navigation/Navigation';
 import TextInputBox from '../../components/TextInputBox';
 import { useDialog } from '../../hooks/useDialog';
+import { useAuth } from '../../hooks/useAuthService';
 
 interface SignUpFormData {
   username: string;
@@ -25,6 +26,7 @@ interface ValidationErrors {
 const SignUpScreen = () => {
   const navigation = useRootNavigation();
   const { showDialog, DialogComponent } = useDialog();
+  const { signUp, isLoading, error, clearError } = useAuth();
 
   const [formData, setFormData] = useState<SignUpFormData>({
     username: '',
@@ -36,7 +38,6 @@ const SignUpScreen = () => {
   });
 
   const [errors, setErrors] = useState<ValidationErrors>({});
-  const [isLoading, setIsLoading] = useState(false);
 
   const updateFormData = (field: keyof SignUpFormData, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -88,47 +89,24 @@ const SignUpScreen = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const mockSignUp = async (): Promise<boolean> => {
-    await new Promise(resolve => setTimeout(resolve, 1500));
-
-    const existingUsers = [
-      'admin', 'user123', 'test', 'demo'
-    ];
-
-    if (existingUsers.includes(formData.username.toLowerCase())) {
-      setErrors({ username: '이미 존재하는 아이디입니다' });
-      return false;
-    }
-
-    const chance = Math.random();
-    return chance > 0.1;
-  };
-
   const handleSignUp = async () => {
     if (!validateForm()) {
       return;
     }
 
-    setIsLoading(true);
+    clearError();
+    const success = await signUp(formData);
 
-    try {
-      const success = await mockSignUp();
-
-      if (success) {
-        showDialog({
-          title: '회원가입 완료',
-          message: '회원가입이 완료되었습니다!',
-          onConfirm: () => navigation.navigate('LoginScreen'),
-          onCancel: () => navigation.navigate('LoginScreen'),
-          onCancelVisible:false,
-        });
-      } else {
-        Alert.alert('회원가입 실패', '회원가입 중 오류가 발생했습니다.');
-      }
-    } catch (error) {
-      Alert.alert('오류', '네트워크 오류가 발생했습니다.');
-    } finally {
-      setIsLoading(false);
+    if (success) {
+      showDialog({
+        title: '회원가입 완료',
+        message: '회원가입이 완료되었습니다!',
+        onConfirm: () => navigation.navigate('LoginScreen'),
+        onCancel: () => navigation.navigate('LoginScreen'),
+        onCancelVisible: false,
+      });
+    } else if (error) {
+      Alert.alert('회원가입 실패', error);
     }
   };
 

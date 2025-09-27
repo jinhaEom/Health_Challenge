@@ -1,19 +1,28 @@
 import { View, Text, FlatList, Image, TouchableOpacity } from 'react-native';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { useRootNavigation } from '../../navigation/Navigation';
 import SearchInput from '../../components/SearchInput';
 import ProductBadge from '../../components/ProductBadge';
 import { useProductFilter } from '../../hooks/useProductFilter';
+import { useProduct } from '../../hooks/useProductService';
 const HomeScreen = () => {
   const [searchFocus, setSearchFocus] = useState(false);
   const navigation = useRootNavigation();
   const {
+    products,
     search,
     setSearch,
-    filteredProducts,
     handleTypePress,
     isTypeSelected,
-  } = useProductFilter();
+    fetchProducts,
+    searchProducts,
+    isLoading,
+    error
+  } = useProduct();
+
+  useEffect(() => {
+    fetchProducts();
+  }, [fetchProducts]);
 
   const handleCartPress = useCallback(() => {
     navigation.navigate('BasketScreen');
@@ -38,7 +47,7 @@ const HomeScreen = () => {
         showCartButton={true}
         onCartPress={handleCartPress}
         showSearchButton={searchFocus}
-        onSearchPress={() => {}}
+        onSearchPress={() => searchProducts(search)}
       />
 
       <View className="flex-row justify-start py-[8px] px-[4px]">
@@ -61,7 +70,7 @@ const HomeScreen = () => {
 
       <FlatList
         className="flex-1"
-        data={filteredProducts}
+        data={products}
         renderItem={({ item }) => (
           <TouchableOpacity
             className="m-2 p-4 border border-light-gray rounded-[12px] bg-white"

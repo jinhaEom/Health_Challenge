@@ -3,6 +3,8 @@ import { useRootRoute, useRootNavigation } from '../../navigation/Navigation';
 import { useOrderStore } from '../../store/useOrderStore';
 import { useCartStore } from '../../store/useCartStore';
 import { useDialog } from '../../hooks/useDialog';
+import { useOrder } from '../../hooks/useOrderService';
+import { useAuth } from '../../hooks/useAuthService';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const PurchaseScreen = () => {
@@ -11,30 +13,43 @@ const PurchaseScreen = () => {
   const { addOrder } = useOrderStore();
   const { removeFromCart } = useCartStore();
   const { showDialog, DialogComponent } = useDialog();
+  const { createOrder, isLoading: orderLoading, error: orderError } = useOrder();
+  const { user } = useAuth();
 
-  const handlePurchase = () => {
-    // 주문 내역 저장
-    addOrder({
-      items: items.map(item => ({
-        id: item.id,
-        name: item.name,
-        price: item.price,
-        quantity: item.quantity,
-      })),
-      totalPrice,
-    });
+  const handlePurchase = async () => {
+    const orderItems = items.map(item => ({
+      id: item.id,
+      name: item.name,
+      price: item.price,
+      quantity: item.quantity,
+    }));
 
-    // 결제 완료 다이얼로그 표시
-    showDialog({
-      title: '결제 완료',
-      message: '결제가 성공적으로 완료되었습니다.',
-      onConfirm: () => {
-        // 장바구니에서 해당 상품들 제거
-        items.forEach(item => removeFromCart(item.id));
-        navigation.navigate('MainTabs');
-      },
-      onCancelVisible:false,
-    });
+    const success = await createOrder(orderItems, totalPrice);
+
+    if (success) {
+      // Store에도 저장 (기존 로직 유지)
+      addOrder({
+        items: orderItems,
+        totalPrice,
+      });
+
+      showDialog({
+        title: '결제 완료',
+        message: '결제가 성공적으로 완료되었습니다.',
+        onConfirm: () => {
+          items.forEach(item => removeFromCart(item.id));
+          navigation.navigate('MainTabs');
+        },
+        onCancelVisible: false,
+      });
+    } else if (orderError) {
+      showDialog({
+        title: '결제 실패',
+        message: orderError,
+        onConfirm: () => {},
+        onCancelVisible: false,
+      });
+    }
   };
 
   return (
@@ -117,15 +132,15 @@ const PurchaseScreen = () => {
           <View className="space-y-[8px]">
             <View className="flex-row">
               <Text className="text-gray w-[80px]">이름:</Text>
-              <Text className="text-dark-gray">엄진하</Text>
+              <Text className="text-dark-gray">{user?.name || '김바이오'}</Text>
             </View>
             <View className="flex-row">
               <Text className="text-gray w-[80px]">연락처:</Text>
-              <Text className="text-dark-gray">010-1234-5678</Text>
+              <Text className="text-dark-gray">{user?.phoneNumber || '010-1234-5678'}</Text>
             </View>
             <View className="flex-row">
               <Text className="text-gray w-[80px]">이메일:</Text>
-              <Text className="text-dark-gray">test@naver.com</Text>
+              <Text className="text-dark-gray">{user?.email || 'test@naver.com'}</Text>
             </View>
           </View>
         </View>
@@ -135,10 +150,11 @@ const PurchaseScreen = () => {
       <View className="bg-white px-[16px] py-[16px] border-t border-light-gray">
         <TouchableOpacity
           onPress={handlePurchase}
-          className="bg-light-blue py-[16px] rounded-[12px]"
+          className={`py-[16px] rounded-[12px] ${orderLoading ? 'bg-gray' : 'bg-light-blue'}`}
+          disabled={orderLoading}
         >
           <Text className="text-white text-[16px] font-bold text-center">
-            {totalPrice.toLocaleString()}원 결제하기
+            {orderLoading ? '결제 중...' : `${totalPrice.toLocaleString()}원 결제하기`}
           </Text>
         </TouchableOpacity>
       </View>

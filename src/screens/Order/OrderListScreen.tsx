@@ -1,15 +1,21 @@
 import { View, Text, FlatList } from 'react-native';
 import { useOrderStore, Order } from '../../store/useOrderStore';
 import { formatDate, formatTime } from '../../utils/dateUtils';
+import { useOrder } from '../../hooks/useOrderService';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import SearchInput from '../../components/SearchInput';
 import { useState, useEffect } from 'react';
 
 const OrderListScreen = () => {
   const { orders } = useOrderStore();
+  const { fetchOrders, isLoading, error } = useOrder();
   const [search, setSearch] = useState('');
   const [searchFocus, setSearchFocus] = useState(false);
   const [filteredOrders, setFilteredOrders] = useState(orders);
+
+  useEffect(() => {
+    fetchOrders();
+  }, [fetchOrders]);
 
   useEffect(() => {
     setFilteredOrders(orders);
