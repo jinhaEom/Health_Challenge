@@ -6,6 +6,29 @@ import OrderListScreen from '../screens/Order/OrderListScreen';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const Tab = createBottomTabNavigator();
+interface TabIconProps {
+  focused: boolean;
+  color: string;
+  size: number;
+}
+
+const HomeIcon = ({ focused }: TabIconProps) => (
+  <Text style={{ fontSize: 20 }}>
+    <Ionicons name="home" size={24} color={focused ? '#3B82F6' : '#6B7280'} />
+  </Text>
+);
+
+const OrderIcon = ({ focused }: TabIconProps) => (
+  <Text style={{ fontSize: 20 }}>
+    <Ionicons name="layers" size={24} color={focused ? '#3B82F6' : '#6B7280'} />
+  </Text>
+);
+
+const ProfileIcon = ({ focused }: TabIconProps) => (
+  <Text style={{ fontSize: 20 }}>
+    <Ionicons name="person" size={24} color={focused ? '#3B82F6' : '#6B7280'} />
+  </Text>
+);
 
 export type BottomTabParamList = {
   Home: undefined;
@@ -32,7 +55,7 @@ const BottomTab = () => {
           fontSize: 12,
           fontWeight: '500',
         },
-        animation:'shift',
+        animation: 'shift',
       }}
     >
       <Tab.Screen
@@ -40,15 +63,7 @@ const BottomTab = () => {
         component={HomeScreen}
         options={{
           tabBarLabel: '홈',
-          tabBarIcon: ({ focused }) => (
-            <Text style={{ fontSize: 20 }}>
-              <Ionicons
-                name="home"
-                size={24}
-                color={focused ? '#3B82F6' : '#6B7280'}
-              />
-            </Text>
-          ),
+          tabBarIcon: HomeIcon,
         }}
       />
       <Tab.Screen
@@ -56,15 +71,7 @@ const BottomTab = () => {
         component={OrderListScreen}
         options={{
           tabBarLabel: '주문내역',
-          tabBarIcon: ({ focused }) => (
-            <Text style={{ fontSize: 20 }}>
-              <Ionicons
-                name="layers"
-                size={24}
-                color={focused ? '#3B82F6' : '#6B7280'}
-              />
-            </Text>
-          ),
+          tabBarIcon: OrderIcon,
         }}
       />
       <Tab.Screen
@@ -72,15 +79,7 @@ const BottomTab = () => {
         component={MyProfileScreen}
         options={{
           tabBarLabel: '마이페이지',
-          tabBarIcon: ({ focused }) => (
-            <Text style={{ fontSize: 20 }}>
-              <Ionicons
-                name="person"
-                size={24}
-                color={focused ? '#3B82F6' : '#6B7280'}
-              />
-            </Text>
-          ),
+          tabBarIcon: ProfileIcon,
         }}
       />
     </Tab.Navigator>

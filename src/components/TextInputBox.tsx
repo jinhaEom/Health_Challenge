@@ -31,10 +31,10 @@ const TextInputBox: React.FC<TextInputBoxProps> = ({
           onChangeText={onChangeText}
           secureTextEntry={secureTextEntry}
           underlineColorAndroid="transparent"
-          selectionColor="#1e40af"
+          selectionColor="black"
           style={{
             fontSize: 16,
-            color: 'blue',
+            color: 'black',
             padding: 0,
             margin: 0,
           }}

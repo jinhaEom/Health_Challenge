@@ -38,10 +38,10 @@ const SearchInput: React.FC<SearchInputProps> = ({
         onSubmitEditing={onSearchPress}
         returnKeyType="search"
         underlineColorAndroid="transparent"
-        selectionColor="blue"
+        selectionColor="black"
         style={{
           fontSize: 14,
-          color: 'blue',
+          color: 'black',
           padding: 8,
           margin: 8,
         }}

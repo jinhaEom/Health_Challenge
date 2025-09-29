@@ -8,7 +8,7 @@ import { useState, useEffect } from 'react';
 
 const OrderListScreen = () => {
   const { orders } = useOrderStore();
-  const { fetchOrders, isLoading, error } = useOrder();
+  const { fetchOrders } = useOrder();
   const [search, setSearch] = useState('');
   const [searchFocus, setSearchFocus] = useState(false);
   const [filteredOrders, setFilteredOrders] = useState(orders);

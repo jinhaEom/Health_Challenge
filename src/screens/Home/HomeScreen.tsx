@@ -3,7 +3,6 @@ import { useState, useCallback, useEffect } from 'react';
 import { useRootNavigation } from '../../navigation/Navigation';
 import SearchInput from '../../components/SearchInput';
 import ProductBadge from '../../components/ProductBadge';
-import { useProductFilter } from '../../hooks/useProductFilter';
 import { useProduct } from '../../hooks/useProductService';
 const HomeScreen = () => {
   const [searchFocus, setSearchFocus] = useState(false);
@@ -16,8 +15,6 @@ const HomeScreen = () => {
     isTypeSelected,
     fetchProducts,
     searchProducts,
-    isLoading,
-    error
   } = useProduct();
 
   useEffect(() => {

@@ -40,81 +40,91 @@ export const useAuth = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // 로그인
-  const login = useCallback(async (request: LoginRequest): Promise<boolean> => {
-    setIsLoading(true);
-    setError(null);
+  const login = useCallback(
+    async (
+      request: LoginRequest,
+    ): Promise<{ success: boolean; user?: User }> => {
+      setIsLoading(true);
+      setError(null);
 
+      try {
 
-    const foundUser = mockUsers.find(u => u.email === request.email);
+        const foundUser = mockUsers.find(u => u.email === request.email);
 
-    if (!foundUser) {
-      setError('존재하지 않는 이메일입니다.');
-      setIsLoading(false);
-      return false;
-    }
+        if (!foundUser) {
+          setError('존재하지 않는 이메일입니다.');
+          setIsLoading(false);
+          return { success: false };
+        }
 
-    if (request.password !== '12345678') {
-      setError('비밀번호가 올바르지 않습니다.');
-      setIsLoading(false);
-      return false;
-    }
+        if (request.password !== '12345678') {
+          setError('비밀번호가 올바르지 않습니다.');
+          setIsLoading(false);
+          return { success: false };
+        }
 
-    // 10% 확률로 서버 에러 시뮬레이션
-    if (Math.random() < 0.1) {
-      setError('서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
-      setIsLoading(false);
-      return false;
-    }
+        // 10% 확률 에러 시뮬레이션
+        if (Math.random() < 0.1) {
+          setError('서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+          setIsLoading(false);
+          return { success: false };
+        }
 
-    setUser(foundUser);
-    setIsLoading(false);
-    return true;
-  }, []);
+        setUser(foundUser);
+        setIsLoading(false);
+        return { success: true, user: foundUser };
+      } catch (err) {
+        setError('로그인 중 오류가 발생했습니다.');
+        setIsLoading(false);
+        return { success: false };
+      }
+    },
+    [],
+  );
 
   // 회원가입
-  const signUp = useCallback(async (request: SignUpRequest): Promise<boolean> => {
-    setIsLoading(true);
-    setError(null);
+  const signUp = useCallback(
+    async (request: SignUpRequest): Promise<boolean> => {
+      setIsLoading(true);
+      setError(null);
 
+      // 중복 사용자명 검사
+      if (existingUsernames.includes(request.username.toLowerCase())) {
+        setError('이미 존재하는 아이디입니다.');
+        setIsLoading(false);
+        return false;
+      }
 
-    // 중복 사용자명 검사
-    if (existingUsernames.includes(request.username.toLowerCase())) {
-      setError('이미 존재하는 아이디입니다.');
-      setIsLoading(false);
-      return false;
-    }
+      // 중복 이메일 검사
+      const existingUser = mockUsers.find(u => u.email === request.email);
+      if (existingUser) {
+        setError('이미 존재하는 이메일입니다.');
+        setIsLoading(false);
+        return false;
+      }  
 
-    // 중복 이메일 검사
-    const existingUser = mockUsers.find(u => u.email === request.email);
-    if (existingUser) {
-      setError('이미 존재하는 이메일입니다.');
-      setIsLoading(false);
-      return false;
-    }
-
-    // 10% 확률로 회원가입 실패 시뮬레이션
+      // 10% 확률로 회원가입 실패 시뮬레이션
     if (Math.random() < 0.1) {
       setError('회원가입 중 오류가 발생했습니다.');
       setIsLoading(false);
       return false;
     }
 
-    // 새 사용자 추가
-    const newUser: User = {
-      id: Date.now().toString(),
-      username: request.username,
-      email: request.email,
-      name: request.name,
-      phoneNumber: request.phoneNumber,
-    };
+      // 새 사용자 추가
+      const newUser: User = {
+        id: Date.now().toString(),
+        username: request.username,
+        email: request.email,
+        name: request.name,
+        phoneNumber: request.phoneNumber,
+      };
 
-    mockUsers.push(newUser);
-    existingUsernames.push(request.username.toLowerCase());
+      mockUsers.push(newUser);
+      existingUsernames.push(request.username.toLowerCase());
 
-    setIsLoading(false);
-    return true;
-  }, []);
+      setIsLoading(false);
+      return true;
+    },[]);
 
   const logout = useCallback(() => {
     setUser(null);
