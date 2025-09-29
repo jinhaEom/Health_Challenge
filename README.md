@@ -1,11 +1,28 @@
 # HealthChallenge App
-
+  ![React Native](https://img.shields.io/badge/React_Native-0.81.4-blue)
+  ![TypeScript](https://img.shields.io/badge/TypeScript-Latest-blue)
+  
 ## 📱 프로젝트 개요
 HealthChallenge는 건강보조식품 E-Commerce 앱 입니다. 사용자는 회원가입 및 로그인 후 건강 설문조사를 완료하고,건강보조식품을 구매할 수 있습니다.
+
+## 🧪 테스트
+
+### 테스트 계정
+앱 테스트 시 다음 계정을 사용하세요:
+
+- **이메일**: `test1234@naver.com`
+- **비밀번호**: `12345678`
+
 
 ## 🚀 주요 기능
 
 ### 1. **사용자 인증**
+<div style="display: flex; gap: 10px;">
+  <img src="./AppImages/1.Login.png" alt="로그인 화면" width="200" height="400"/>
+  <img src="./AppImages/2.SignUp.png" alt="회원가입 화면" width="200" height="400"/>
+</div>
+&nbsp;
+
 - **로그인**: 이메일과 비밀번호로 로그인
 - **회원가입**: 사용자 정보 입력 후 계정 생성
 - **테스트 계정**:
@@ -13,6 +30,13 @@ HealthChallenge는 건강보조식품 E-Commerce 앱 입니다. 사용자는 회
   - 비밀번호: `12345678`
 
 ### 2. **건강 설문조사**
+<div style="display: flex; gap: 10px;">
+  <img src="./AppImages/3.Survey.png" alt="설문조사 화면" width="200" height="400"/>
+  <img src="./AppImages/4.Survey_Result.png" alt="설문조사 결과 화면" width="200" height="400"/>
+   <img src="./AppImages/5.Survey_Result2.png" alt="설문조사 결과 화면2" width="200" height="400"/>
+</div>
+&nbsp;
+
 - 로그인 후 필수로 진행하는 건강 상태 체크
 - 5가지 항목 조사:
   - 하루 물 섭취량
@@ -22,17 +46,36 @@ HealthChallenge는 건강보조식품 E-Commerce 앱 입니다. 사용자는 회
   - 식사 규칙성
 
 ### 3. **상품 관리**
+<div style="display: flex; gap: 10px;">
+  <img src="./AppImages/6.home.png" alt="홈 화면" width="200" height="400"/>
+  <img src="./AppImages/7.product_detail.png" alt="상품 상세" width="200" height="400"/>
+   <img src="./AppImages/8.basket.png" alt="장바구니 화면" width="200" height="400"/>
+</div>
+&nbsp;
+
 - **홈 화면**: 전체 상품 목록 조회
 - **상품 검색**: 상품명으로 검색 기능
 - **카테고리 필터**: 비타민, 단백질, 마그네슘으로 분류
 - **상품 상세**: 상품 정보, 이미지, 리뷰 확인
 
 ### 4. **쇼핑 기능**
+<div style="display: flex; gap: 10px;">
+  <img src="./AppImages/9.order.png" alt="상품 주문 화면" width="200" height="400"/>
+  <img src="./AppImages/10.order_success.png" alt="상품 주문 성공 화면" width="200" height="400"/>
+   <img src="./AppImages/11.order_list.png" alt="주문된 상품 리스트 화면" width="200" height="400"/>
+</div>
+
+&nbsp;
+
 - **장바구니**: 상품 추가/삭제, 수량 조정
 - **주문**: 장바구니 상품 주문 처리
 - **주문 내역**: 과거 주문 기록 조회
 
 ### 5. **마이 페이지**
+ <img src="./AppImages/12.userProfile.png" alt="유저 프로필" width="200" height="400"/>
+
+&nbsp;
+
 - **내 정보**: 사용자 계정 정보 확인 및 이름 수정
 - **계정 관리**: 로그아웃 및 회원탈퇴
 - **앱 정보** : 앱버전 확인
@@ -137,51 +180,4 @@ npm run ios
 # 또는
 yarn ios
 ```
-
-## 🧪 테스트
-
-### 테스트 계정
-앱 테스트 시 다음 계정을 사용하세요:
-
-- **이메일**: `test1234@naver.com`
-- **비밀번호**: `12345678`
-- **사용자명**: `test1234`
-- **이름**: `김바이오`
-
-
-
-## 📋 사용 가이드
-
-### 1. 로그인
-- 앱 시작 후 테스트 계정으로 로그인
-- 신규 사용자는 "Sign Up" 버튼으로 회원가입
-
-### 2. 건강 설문조사
-- 로그인 후 설문조사 화면으로 이동
-- 5개 질문에 답변 후 결과확인 
-- 설문 다시하기 or 홈화면 이동
-
-### 3. 상품 탐색
-- 홈 화면에서 상품 카테고리별 필터링
-- 검색창으로 상품명 검색
-- 상품 클릭으로 상세 정보 확인
-
-### 4. 구매 프로세스
-- 상품 상세에서 장바구니 추가(장바구니에서 수량 조정가능) or 주문하기 클릭
-- 구매 버튼으로 주문 완료
-
-
-## 📝 추가 정보
-
-### 상태 관리
-- **Zustand**를 사용한 전역 상태 관리
-- 장바구니, 주문 정보 등 지속적인 데이터 관리
-
-### 스타일링
-- **NativeWind** (Tailwind CSS for React Native)
-- 반응형 디자인 및 일관된 UI
-
-### 네비게이션
-- **React Navigation** 사용
-- Stack, Tab, MaterialTop Tab 네비게이션 구현
 
