@@ -15,6 +15,7 @@ const HomeScreen = () => {
     isTypeSelected,
     fetchProducts,
     searchProducts,
+    clearSearch,
   } = useProduct();
 
   useEffect(() => {
@@ -33,18 +34,41 @@ const HomeScreen = () => {
     setSearchFocus(false);
   }, []);
 
+  const handleSearchPress = useCallback(async () => {
+    if (search.trim() === '') {
+      await fetchProducts();
+    } else {
+      await searchProducts(search);
+    }
+  }, [search, fetchProducts, searchProducts]);
+
+  const handleClearPress = useCallback(() => {
+    clearSearch();
+  }, [clearSearch]);
+
+  const handleSearchTextChange = useCallback(
+    (text: string) => {
+      setSearch(text);
+      if (text.trim() === '') {
+        clearSearch();
+      }
+    },
+    [setSearch, clearSearch],
+  );
+
   return (
     <View className="flex-1">
       <SearchInput
         placeholder="상품명을 검색해주세요."
         value={search}
-        onChangeText={setSearch}
+        onChangeText={handleSearchTextChange}
         onFocus={handleSearchFocus}
         onBlur={handleSearchBlur}
+        onClearPress={handleClearPress}
         showCartButton={true}
         onCartPress={handleCartPress}
         showSearchButton={searchFocus}
-        onSearchPress={() => searchProducts(search)}
+        onSearchPress={handleSearchPress}
       />
 
       <View className="flex-row justify-start py-[8px] px-[4px]">

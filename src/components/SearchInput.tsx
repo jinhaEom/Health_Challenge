@@ -9,6 +9,7 @@ interface SearchInputProps {
   onFocus?: () => void;
   onBlur?: () => void;
   onSearchPress?: () => void;
+  onClearPress?: () => void;
   showSearchButton?: boolean;
   showCartButton?: boolean;
   onCartPress?: () => void;
@@ -21,31 +22,49 @@ const SearchInput: React.FC<SearchInputProps> = ({
   onFocus,
   onBlur,
   onSearchPress,
+  onClearPress,
   showSearchButton = false,
   showCartButton = false,
   onCartPress,
 }) => {
   return (
     <View className="flex-row items-center">
-      <TextInput
-        placeholder={placeholder}
-        placeholderTextColor="#A0AEC0"
-        className="border-[1px] border-blue p-[8px] m-[8px] flex-1 rounded-[12px] h-[36px] bg-white"
-        value={value}
-        onChangeText={onChangeText}
-        onFocus={onFocus}
-        onBlur={onBlur}
-        onSubmitEditing={onSearchPress}
-        returnKeyType="search"
-        underlineColorAndroid="transparent"
-        selectionColor="black"
-        style={{
-          fontSize: 14,
-          color: 'black',
-          padding: 8,
-          margin: 8,
-        }}
-      />
+      <View className="flex-1 relative">
+        <TextInput
+          placeholder={placeholder}
+          placeholderTextColor="#A0AEC0"
+          className="border-[1px] border-blue p-[8px] m-[8px] rounded-[12px] h-[36px] bg-white pr-[40px]"
+          value={value}
+          onChangeText={onChangeText}
+          onFocus={onFocus}
+          onBlur={onBlur}
+          onSubmitEditing={onSearchPress}
+          returnKeyType="search"
+          underlineColorAndroid="transparent"
+          selectionColor="black"
+          style={{
+            fontSize: 14,
+            color: 'black',
+            padding: 8,
+            margin: 8,
+            paddingRight: 40,
+          }}
+        />
+
+        {value.length > 0 && onClearPress && (
+          <TouchableOpacity
+            className="absolute right-[16px] top-[50%] transform -translate-y-[12px]"
+            onPress={onClearPress}
+            style={{
+              position: 'absolute',
+              right: 16,
+              top: '50%',
+            }}
+          >
+            <Ionicons name="close-circle" size={20} color="#A0AEC0" />
+          </TouchableOpacity>
+        )}
+      </View>
 
       {/* 장바구니 버튼 */}
       {showCartButton && onCartPress && (

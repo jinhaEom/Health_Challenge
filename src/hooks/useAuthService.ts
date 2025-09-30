@@ -48,7 +48,6 @@ export const useAuth = () => {
       setError(null);
 
       try {
-
         const foundUser = mockUsers.find(u => u.email === request.email);
 
         if (!foundUser) {
@@ -82,49 +81,59 @@ export const useAuth = () => {
     [],
   );
 
-  // 회원가입
   const signUp = useCallback(
-    async (request: SignUpRequest): Promise<boolean> => {
+    async (
+      request: SignUpRequest,
+    ): Promise<{ success: boolean; user?: User }> => {
       setIsLoading(true);
       setError(null);
 
-      // 중복 사용자명 검사
-      if (existingUsernames.includes(request.username.toLowerCase())) {
-        setError('이미 존재하는 아이디입니다.');
+      try {
+
+        // 중복 사용자명 검사
+        if (existingUsernames.includes(request.username.toLowerCase())) {
+          setError('이미 존재하는 아이디입니다.');
+          setIsLoading(false);
+          return { success: false };
+        }
+
+        // 중복 이메일 검사
+        const existingUser = mockUsers.find(u => u.email === request.email);
+        if (existingUser) {
+          setError('이미 존재하는 이메일입니다.');
+          setIsLoading(false);
+          return { success: false };
+        }
+
+        // 10% 확률로 회원가입 실패 시뮬레이션
+        if (Math.random() < 0.1) {
+          setError('회원가입 중 오류가 발생했습니다.');
+          setIsLoading(false);
+          return { success: false };
+        }
+
+        // 새 사용자 추가
+        const newUser: User = {
+          id: Date.now().toString(),
+          username: request.username,
+          email: request.email,
+          name: request.name,
+          phoneNumber: request.phoneNumber,
+        };
+
+        mockUsers.push(newUser);
+        existingUsernames.push(request.username.toLowerCase());
+
         setIsLoading(false);
-        return false;
+        return { success: true, user: newUser };
+      } catch (err) {
+        setError('회원가입 중 오류가 발생했습니다.');
+        setIsLoading(false);
+        return { success: false };
       }
-
-      // 중복 이메일 검사
-      const existingUser = mockUsers.find(u => u.email === request.email);
-      if (existingUser) {
-        setError('이미 존재하는 이메일입니다.');
-        setIsLoading(false);
-        return false;
-      }  
-
-      // 10% 확률로 회원가입 실패 시뮬레이션
-    if (Math.random() < 0.1) {
-      setError('회원가입 중 오류가 발생했습니다.');
-      setIsLoading(false);
-      return false;
-    }
-
-      // 새 사용자 추가
-      const newUser: User = {
-        id: Date.now().toString(),
-        username: request.username,
-        email: request.email,
-        name: request.name,
-        phoneNumber: request.phoneNumber,
-      };
-
-      mockUsers.push(newUser);
-      existingUsernames.push(request.username.toLowerCase());
-
-      setIsLoading(false);
-      return true;
-    },[]);
+    },
+    [],
+  );
 
   const logout = useCallback(() => {
     setUser(null);

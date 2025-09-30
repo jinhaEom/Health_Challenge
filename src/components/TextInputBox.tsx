@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { View, TextInput, TouchableOpacity } from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 // TextInputBox 컴포넌트의 Props 인터페이스 정의
 interface TextInputBoxProps {
@@ -43,11 +44,11 @@ const TextInputBox: React.FC<TextInputBoxProps> = ({
         {/* 텍스트가 있을 때만 X 버튼 표시 */}
         {value.length > 0 && (
           <TouchableOpacity
-            className="center"
+            className="ml-[8px]"
             onPress={handleClear}
             activeOpacity={0.7}
           >
-            <Text className="text-lg text-blue font-bold">✕</Text>
+            <Ionicons name="close-circle" size={20} color="#A0AEC0" />
           </TouchableOpacity>
         )}
       </View>

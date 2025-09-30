@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, ScrollView, Alert } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { useRootNavigation } from '../../navigation/Navigation';
 import TextInputBox from '../../components/TextInputBox';
 import { useDialog } from '../../hooks/useDialog';
@@ -34,7 +34,7 @@ const SignUpScreen = () => {
     password: '',
     confirmPassword: '',
     name: '',
-    phoneNumber: ''
+    phoneNumber: '',
   });
 
   const [errors, setErrors] = useState<ValidationErrors>({});
@@ -94,19 +94,29 @@ const SignUpScreen = () => {
       return;
     }
 
-    clearError();
-    const success = await signUp(formData);
+    // 이미 로딩 중이면 중복 실행 방지
+    if (isLoading) {
+      return;
+    }
 
-    if (success) {
+    clearError();
+    const result = await signUp(formData);
+
+    if (result.success && result.user) {
       showDialog({
         title: '회원가입 완료',
-        message: '회원가입이 완료되었습니다!',
+        message: `${result.user.name}님, 회원가입이 완료되었습니다!`,
         onConfirm: () => navigation.navigate('LoginScreen'),
         onCancel: () => navigation.navigate('LoginScreen'),
         onCancelVisible: false,
       });
     } else if (error) {
-      Alert.alert('회원가입 실패', error);
+      showDialog({
+        title: '회원가입 실패',
+        message: error,
+        onConfirm: () => {},
+        onCancelVisible: false,
+      });
     }
   };
 
@@ -118,7 +128,6 @@ const SignUpScreen = () => {
             회원가입
           </Text>
 
-
           <View className="mb-[32px]">
             <Text className="text-[16px] font-semibold text-gray mb-[8px] ml-[4px]">
               아이디
@@ -126,8 +135,7 @@ const SignUpScreen = () => {
             <TextInputBox
               placeholder="아이디를 입력하세요"
               value={formData.username}
-              onChangeText={(text) => updateFormData('username', text)}
-
+              onChangeText={text => updateFormData('username', text)}
             />
             {errors.username && (
               <Text className="text-red text-[12px] ml-[4px] mt-[4px]">
@@ -141,7 +149,7 @@ const SignUpScreen = () => {
             <TextInputBox
               placeholder="이메일을 입력하세요"
               value={formData.email}
-              onChangeText={(text) => updateFormData('email', text)}
+              onChangeText={text => updateFormData('email', text)}
             />
             {errors.email && (
               <Text className="text-red text-[12px] ml-[4px] mt-[4px]">
@@ -155,7 +163,7 @@ const SignUpScreen = () => {
             <TextInputBox
               placeholder="비밀번호를 입력하세요"
               value={formData.password}
-              onChangeText={(text) => updateFormData('password', text)}
+              onChangeText={text => updateFormData('password', text)}
               secureTextEntry
             />
             {errors.password && (
@@ -170,7 +178,7 @@ const SignUpScreen = () => {
             <TextInputBox
               placeholder="비밀번호를 다시 입력하세요"
               value={formData.confirmPassword}
-              onChangeText={(text) => updateFormData('confirmPassword', text)}
+              onChangeText={text => updateFormData('confirmPassword', text)}
               secureTextEntry
             />
             {errors.confirmPassword && (
@@ -185,7 +193,7 @@ const SignUpScreen = () => {
             <TextInputBox
               placeholder="이름을 입력하세요"
               value={formData.name}
-              onChangeText={(text) => updateFormData('name', text)}
+              onChangeText={text => updateFormData('name', text)}
             />
             {errors.name && (
               <Text className="text-red text-[12px] ml-[4px] mt-[4px]">
@@ -199,7 +207,7 @@ const SignUpScreen = () => {
             <TextInputBox
               placeholder="010-0000-0000"
               value={formData.phoneNumber}
-              onChangeText={(text) => updateFormData('phoneNumber', text)}
+              onChangeText={text => updateFormData('phoneNumber', text)}
             />
             {errors.phoneNumber && (
               <Text className="text-red text-[12px] ml-[4px] mt-[4px]">
@@ -209,8 +217,9 @@ const SignUpScreen = () => {
           </View>
 
           <TouchableOpacity
-            className={`rounded-[12px] py-[16px] mb-[16px] ${isLoading ? 'bg-gray' : 'bg-blue'
-              }`}
+            className={`rounded-[12px] py-[16px] mb-[16px] ${
+              isLoading ? 'bg-gray' : 'bg-blue'
+            }`}
             onPress={handleSignUp}
             disabled={isLoading}
           >
