@@ -90,11 +90,9 @@ const MyProfileScreen = () => {
   return (
     <View className="flex-1 bg-gray-50">
       {/* 헤더 */}
-      <View className="bg-white px-[16px] py-[12px] flex-row justify-between items-center border-b border-light-gray">
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Ionicons name="arrow-back" size={24} color="black" />
-        </TouchableOpacity>
-        <Text className="text-[16px] font-bold text-dark-gray">내 프로필</Text>
+      <View className="bg-background px-[16px] py-[12px]  items-center border-b border-light-gray">
+      
+        <Text className="text-[16px] font-bold text-dark-gray ">내 프로필</Text>
         <View style={{ width: 24 }} />
       </View>
 

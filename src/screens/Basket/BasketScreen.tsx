@@ -151,7 +151,7 @@ const BasketScreen = () => {
     return (
       <View className="flex-1 bg-gray-50">
         {/* 헤더 */}
-        <View className="bg-white px-[16px] py-[12px] flex-row justify-between items-center ">
+        <View className="bg-background px-[16px] py-[12px] flex-row justify-between items-center ">
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Ionicons name="arrow-back" size={24} color="black" />
           </TouchableOpacity>
@@ -176,8 +176,8 @@ const BasketScreen = () => {
   }
 
   return (
-    <View className="flex-1 bg-background">
-      <View className="bg-white px-[16px] py-[12px] flex-row justify-between items-center border-b border-light-gray">
+    <View className="flex-1 bg-gray-50">
+      <View className="bg-background px-[16px] py-[12px] flex-row justify-between items-center border-b border-light-gray">
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionicons name="arrow-back" size={24} color="black" />
         </TouchableOpacity>

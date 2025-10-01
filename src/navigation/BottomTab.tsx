@@ -44,7 +44,7 @@ const BottomTab = () => {
         tabBarActiveTintColor: '#3B82F6',
         tabBarInactiveTintColor: '#6B7280',
         tabBarStyle: {
-          backgroundColor: 'white',
+          backgroundColor: '#f9fafb',
           borderTopWidth: 1,
           borderTopColor: '#E5E7EB',
           paddingBottom: 5,

@@ -116,9 +116,9 @@ const ProductInfoTab = ({ product }: { product: ProductInfo }) => {
   const navigation = useRootNavigation();
 
   return (
-    <View className="flex-1">
+    <View className="flex-1 bg-background">
       <ScrollView className="flex-1 p-[16px]">
-        <Text className="text-[20px] font-bold mb-[4px]">{product?.name}</Text>
+        <Text className="text-[ 0px] font-bold mb-[4px]">{product?.name}</Text>
         <Text className="text-[18px] text-red font-semibold">
           {product?.price?.toLocaleString()}원
         </Text>
@@ -182,7 +182,7 @@ const ProductInfoTab = ({ product }: { product: ProductInfo }) => {
 // 상품 리뷰 탭
 const ReviewTab = ({ product }: { product: ProductInfo }) => {
   return (
-    <ScrollView className="flex-1 p-4">
+    <ScrollView className="flex-1 p-4 bg-background">
       {product?.ProductReview?.map((review: ProductReview) => (
         <View key={review.id} className="mb-4 p-4 bg-gray-50 rounded-[12px]">
           <View className="flex-row items-center mb-2">
@@ -207,7 +207,7 @@ const ReviewTab = ({ product }: { product: ProductInfo }) => {
 // 상품 설명 탭
 const ProductDescriptionTab = ({ product }: { product: ProductInfo }) => {
   return (
-    <ScrollView className="flex-1 p-[16px]">
+    <ScrollView className="flex-1 p-[16px]  bg-background">
       <Text className="text-[16px]">{product?.description}</Text>
     </ScrollView>
   );
@@ -219,7 +219,7 @@ const ProductDetailScreen = () => {
   const navigation = useRootNavigation();
 
   return (
-    <View className="flex-1">
+    <View className="flex-1 bg-background">
       <View className="flex-row items-center p-[16px]">
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionicons name="arrow-back" size={24} color="black" />

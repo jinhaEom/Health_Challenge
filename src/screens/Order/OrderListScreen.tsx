@@ -41,7 +41,7 @@ const OrderListScreen = () => {
     setFilteredOrders(filtered);
   };
   const renderOrderItem = ({ item }: { item: Order }) => (
-    <View className="bg-white mx-[16px] mb-[12px] p-[16px] rounded-[12px] shadow-sm border border-light-gray">
+    <View className="bg-background mx-[16px] mb-[12px] p-[16px] rounded-[12px] shadow-sm border border-light-gray">
       <View className="flex-row justify-between items-start mb-[12px]">
         <View>
           <Text className="text-[14px] font-semibold text-dark-gray mb-[4px]">
@@ -72,10 +72,7 @@ const OrderListScreen = () => {
 
       {/* 주문 상품 */}
       {item.items.map((orderItem, index) => (
-        <View
-          key={index}
-          className="pb-[8px] mb-[8px]"
-        >
+        <View key={index} className="pb-[8px] mb-[8px]">
           <Text
             className="text-base font-semibold text-dark-gray"
             numberOfLines={2}
@@ -98,7 +95,9 @@ const OrderListScreen = () => {
 
       {/* 총 금액 */}
       <View className="flex-row justify-between items-center mt-[12px] pt-[12px] border-t border-light-gray">
-        <Text className="text-[16px] font-bold text-dark-gray">총 결제금액</Text>
+        <Text className="text-[16px] font-bold text-dark-gray">
+          총 결제금액
+        </Text>
         <Text className="text-[16px] font-bold text-red">
           {item.totalPrice.toLocaleString()}원
         </Text>
@@ -108,9 +107,9 @@ const OrderListScreen = () => {
 
   if (orders.length === 0) {
     return (
-      <View className="flex-1 bg-background">
+      <View className="flex-1 bg-gray-50">
         {/* 헤더 */}
-        <View className="bg-white px-[16px] py-[12px] border-b border-light-gray">
+        <View className="px-[16px] py-[12px] border-b border-light-gray bg-background">
           <Text className="text-[16px] font-bold text-gray-800">
             주문 내역 (0건)
           </Text>
@@ -146,9 +145,9 @@ const OrderListScreen = () => {
   }
 
   return (
-    <View className="flex-1 bg-background">
+    <View className="flex-1 bg-gray-50">
       {/* 헤더 */}
-      <View className="bg-white px-[16px] py-[12px] border-b border-light-gray">
+      <View className="px-[16px] py-[12px] border-b border-light-gray bg-background">
         <Text className="text-lg font-bold text-dark-gray">
           주문 내역 ({filteredOrders.length}건)
         </Text>

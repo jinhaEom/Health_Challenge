@@ -1,15 +1,17 @@
-import Navigation from "./src/navigation/Navigation";
+import Navigation from './src/navigation/Navigation';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { StatusBar } from 'react-native';
 
 function App() {
+ 
   return (
     <SafeAreaProvider>
-      <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
+      <StatusBar backgroundColor="#f9fafb" />
+      <SafeAreaView style={{ flex: 1, backgroundColor: '#f9fafb' }} edges={['top', 'bottom']}>
         <Navigation />
       </SafeAreaView>
     </SafeAreaProvider>
   );
-
 }
 
 export default App;

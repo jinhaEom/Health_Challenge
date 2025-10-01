@@ -57,7 +57,7 @@ const HomeScreen = () => {
   );
 
   return (
-    <View className="flex-1">
+    <View className="flex-1 bg-background">
       <SearchInput
         placeholder="상품명을 검색해주세요."
         value={search}

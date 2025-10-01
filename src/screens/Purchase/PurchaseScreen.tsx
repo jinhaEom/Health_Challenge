@@ -13,7 +13,11 @@ const PurchaseScreen = () => {
   const { addOrder } = useOrderStore();
   const { removeFromCart } = useCartStore();
   const { showDialog, DialogComponent } = useDialog();
-  const { createOrder, isLoading: orderLoading, error: orderError } = useOrder();
+  const {
+    createOrder,
+    isLoading: orderLoading,
+    error: orderError,
+  } = useOrder();
   const { user } = useAuth();
 
   const handlePurchase = async () => {
@@ -38,7 +42,10 @@ const PurchaseScreen = () => {
         message: '결제가 성공적으로 완료되었습니다.',
         onConfirm: () => {
           items.forEach(item => removeFromCart(item.id));
-          navigation.navigate('MainTabs');
+          navigation.reset({
+            index: 0,
+            routes: [{ name: 'MainTabs' }],
+          });
         },
         onCancelVisible: false,
       });
@@ -53,17 +60,17 @@ const PurchaseScreen = () => {
   };
 
   return (
-    <View className="flex-1 bg-background">
+    <View className="flex-1 bg-gray-50">
       {/* 헤더 */}
-      <View className="bg-white px-[16px] py-[12px] flex-row items-center border-b border-light-gray">
-        <TouchableOpacity onPress={() => navigation.goBack()}>
+      <View className="px-[16px] py-[12px] flex-row items-center border-b border-light-gray justify-center bg-background">
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+          className="absolute left-[16px]"
+        >
           <Ionicons name="arrow-back" size={24} color="black" />
         </TouchableOpacity>
-        <Text className="ml-[16px] text-[16px] font-bold text-dark-gray  ">
-          결제하기
-        </Text>
+        <Text className="text-[16px] font-bold text-dark-gray">결제하기</Text>
       </View>
-
       <ScrollView className="flex-1">
         {/* 주문 정보 */}
         <View className="bg-white mx-[16px] mt-[16px] p-[16px] rounded-[12px] shadow-sm">
@@ -136,11 +143,15 @@ const PurchaseScreen = () => {
             </View>
             <View className="flex-row">
               <Text className="text-gray w-[80px]">연락처:</Text>
-              <Text className="text-dark-gray">{user?.phoneNumber || '010-1234-5678'}</Text>
+              <Text className="text-dark-gray">
+                {user?.phoneNumber || '010-1234-5678'}
+              </Text>
             </View>
             <View className="flex-row">
               <Text className="text-gray w-[80px]">이메일:</Text>
-              <Text className="text-dark-gray">{user?.email || 'test@naver.com'}</Text>
+              <Text className="text-dark-gray">
+                {user?.email || 'test@naver.com'}
+              </Text>
             </View>
           </View>
         </View>
@@ -150,11 +161,15 @@ const PurchaseScreen = () => {
       <View className="bg-white px-[16px] py-[16px] border-t border-light-gray">
         <TouchableOpacity
           onPress={handlePurchase}
-          className={`py-[16px] rounded-[12px] ${orderLoading ? 'bg-gray' : 'bg-light-blue'}`}
+          className={`py-[16px] rounded-[12px] ${
+            orderLoading ? 'bg-gray' : 'bg-light-blue'
+          }`}
           disabled={orderLoading}
         >
           <Text className="text-white text-[16px] font-bold text-center">
-            {orderLoading ? '결제 중...' : `${totalPrice.toLocaleString()}원 결제하기`}
+            {orderLoading
+              ? '결제 중...'
+              : `${totalPrice.toLocaleString()}원 결제하기`}
           </Text>
         </TouchableOpacity>
       </View>

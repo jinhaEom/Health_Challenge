@@ -59,7 +59,7 @@ const SurveyScreen = () => {
     const { level, color, advice } = getHealthAdvice(score);
 
     return (
-      <View className="flex-1 bg-white">
+      <View className="flex-1 bg-background">
         <ScrollView>
           <View className="flex-1 justify-center items-center p-[24px]">
             <Text className="text-[30px] font-bold text-gray-800 mb-[24px]">건강체크 결과</Text>
@@ -95,7 +95,10 @@ const SurveyScreen = () => {
             <TouchableOpacity
               className="bg-light-blue rounded-[12px] py-[16px] px-[32px] mt-[24px]"
               onPress={() => {
-                navigation.navigate('MainTabs');
+                navigation.reset({
+                  index: 0,
+                  routes: [{ name: 'MainTabs' }],
+                });
               }}
             >
               <Text className="text-white text-[18px] font-semibold">앱 이용하기</Text>
