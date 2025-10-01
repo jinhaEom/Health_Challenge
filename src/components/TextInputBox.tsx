@@ -1,5 +1,10 @@
-import React from 'react';
-import { View, TextInput, TouchableOpacity } from 'react-native';
+import React, { forwardRef } from 'react';
+import {
+  View,
+  TextInput,
+  TouchableOpacity,
+  ReturnKeyTypeOptions,
+} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 // TextInputBox 컴포넌트의 Props 인터페이스 정의
@@ -8,14 +13,24 @@ interface TextInputBoxProps {
   value: string;
   onChangeText: (text: string) => void;
   secureTextEntry?: boolean;
+  returnKeyType?: ReturnKeyTypeOptions;
+  onSubmitEditing?: () => void;
+  blurOnSubmit?: boolean;
 }
 
-const TextInputBox: React.FC<TextInputBoxProps> = ({
-  placeholder,
-  value,
-  onChangeText,
-  secureTextEntry = false,
-}) => {
+const TextInputBox = forwardRef<TextInput, TextInputBoxProps>(
+  (
+    {
+      placeholder,
+      value,
+      onChangeText,
+      secureTextEntry = false,
+      returnKeyType = 'next',
+      onSubmitEditing,
+      blurOnSubmit = false,
+    },
+    ref,
+  ) => {
   // 텍스트 클리어 함수
   const handleClear = () => {
     onChangeText('');
@@ -25,12 +40,16 @@ const TextInputBox: React.FC<TextInputBoxProps> = ({
     <View className="my-[8px] mx-[16px]">
       <View className="flex-row items-center bg-white border-2 border-blue rounded-[12px] px-[16px] py-[12px] h-[50px]">
         <TextInput
+          ref={ref}
           className="flex-1 text-blue"
           placeholder={placeholder}
           placeholderTextColor="#A0AEC0"
           value={value}
           onChangeText={onChangeText}
           secureTextEntry={secureTextEntry}
+          returnKeyType={returnKeyType}
+          onSubmitEditing={onSubmitEditing}
+          blurOnSubmit={blurOnSubmit}
           underlineColorAndroid="transparent"
           selectionColor="black"
           style={{
@@ -54,6 +73,9 @@ const TextInputBox: React.FC<TextInputBoxProps> = ({
       </View>
     </View>
   );
-};
+  },
+);
+
+TextInputBox.displayName = 'TextInputBox';
 
 export default TextInputBox;
