@@ -147,8 +147,6 @@ src/
 
 1. **의존성 설치**
 ```bash
-npm install
-# 또는
 yarn install
 ```
 
@@ -160,8 +158,6 @@ cd ios && pod install && cd ..
 
 3. **Metro 개발 서버 시작**
 ```bash
-npm start
-# 또는
 yarn start
 ```
 
@@ -169,15 +165,11 @@ yarn start
 
 **Android:**
 ```bash
-npm run android
-# 또는
 yarn android
 ```
 
 **iOS:**
 ```bash
-npm run ios
-# 또는
 yarn ios
 ```
 
