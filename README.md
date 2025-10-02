@@ -105,6 +105,8 @@ src/
 │   ├── ProductBadge.tsx        # 상품 카테고리 배지
 │   ├── PlusMinusButton.tsx     # 수량 조절 버튼
 │   └── CustomDialog.tsx        # 커스텀 다이얼로그
+│   └── EmptyStateView.tsx        # 빈 데이터 결과 출력 화면
+
 ├── screens/             # 화면 컴포넌트
 │   ├── Login/
 │   │   ├── LoginScreen.tsx     # 로그인 화면
