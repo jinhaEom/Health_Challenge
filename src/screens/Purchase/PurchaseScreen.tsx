@@ -97,7 +97,7 @@ const PurchaseScreen = () => {
               </Text>
               <View className="flex-row justify-between items-center mt-[8px]">
                 <Text className="text-[12px] text-dark-gray">
-                  수량: {item.quantity}개
+                  수량 {item.quantity}개
                 </Text>
                 <Text className="text-red font-semibold">
                   {(item.price * item.quantity).toLocaleString()}원
@@ -138,19 +138,19 @@ const PurchaseScreen = () => {
 
           <View className="space-y-[8px]">
             <View className="flex-row">
-              <Text className="text-gray w-[80px]">이름:</Text>
-              <Text className="text-dark-gray">{user?.name || '김바이오'}</Text>
+              <Text className="text-gray w-[80px]">이름</Text>
+              <Text className="text-dark-gray flex-1">{user?.name || '김바이오'}</Text>
             </View>
             <View className="flex-row">
-              <Text className="text-gray w-[80px]">연락처:</Text>
-              <Text className="text-dark-gray">
+              <Text className="text-gray w-[80px]">연락처</Text>
+              <Text className="text-dark-gray flex-1">
                 {user?.phoneNumber || '010-1234-5678'}
               </Text>
             </View>
             <View className="flex-row">
-              <Text className="text-gray w-[80px]">이메일:</Text>
-              <Text className="text-dark-gray">
-                {user?.email || 'test@naver.com'}
+              <Text className="text-gray w-[80px]">이메일</Text>
+              <Text className="text-dark-gray flex-1">
+                {user?.email || 'test1234@naver.com'}
               </Text>
             </View>
           </View>

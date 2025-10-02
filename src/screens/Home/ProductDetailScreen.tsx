@@ -186,14 +186,12 @@ const ReviewTab = ({ product }: { product: ProductInfo }) => {
       {product?.ProductReview?.map((review: ProductReview) => (
         <View key={review.id} className="mb-4 p-4 bg-gray-50 rounded-[12px]">
           <View className="flex-row items-center mb-2">
-            <Text className="font-semibold text-blue">
-              {review.reviewer}
-            </Text>
+            <Text className="font-semibold text-blue">{review.reviewer}</Text>
             <Text className="ml-[4px] text-yellow">
               {'★'.repeat(parseInt(review.score, 10))}
               {'☆'.repeat(5 - parseInt(review.score, 10))}
             </Text>
-            <Text className="ml-auto text-gray text-[12px]">
+            <Text className="ml-auto text-gray text-[12px] min-w-[80px]">
               {review.date}
             </Text>
           </View>

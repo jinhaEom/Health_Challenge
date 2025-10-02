@@ -133,10 +133,10 @@ const OrderListScreen = () => {
         {/* 빈 주문 내역 */}
         <View className="flex-1 justify-center items-center">
           <Ionicons name="receipt-outline" size={80} color="#9ca3af" />
-          <Text className="text-[16px] font-semibold text-dark-gray mt-[16px]">
+          <Text className="text-[16px] font-semibold text-gray mt-[16px]">
             주문 내역이 없습니다
           </Text>
-          <Text className="text-[12px] text-dark-gray mt-[8px] text-center px-[8px]">
+          <Text className="text-[12px] text-gray mt-[8px] text-center px-[8px]">
             상품을 주문하면 여기에서 확인할 수 있습니다
           </Text>
         </View>

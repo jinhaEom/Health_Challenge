@@ -92,6 +92,7 @@ const HomeScreen = () => {
       <FlatList
         className="flex-1"
         data={products}
+        contentContainerStyle={products.length === 0 ? { flex: 1 } : {}}
         renderItem={({ item }) => (
           <TouchableOpacity
             className="m-2 p-4 border border-light-gray rounded-[12px] bg-white"
@@ -114,7 +115,7 @@ const HomeScreen = () => {
         )}
         ListEmptyComponent={
           <View className="flex-1 justify-center items-center">
-            <Text className="text-gray ">검색결과가 없습니다.</Text>
+            <Text className="text-gray text-center w-full">검색결과가 없습니다.</Text>
           </View>
         }
         keyExtractor={item => item.id.toString()}

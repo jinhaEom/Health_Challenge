@@ -107,7 +107,7 @@ const BasketScreen = () => {
               onPress={() => toggleItemSelection(item.id)}
             />
             <Text
-              className="text-lg font-semibold text-gray-800"
+              className="text-[18px] mr-[4px] mb-[8px] font-semibold text-dark-gray"
               numberOfLines={2}
             >
               {item.name}
@@ -115,9 +115,9 @@ const BasketScreen = () => {
           </View>
 
           {/* 수량 조절 섹션 */}
-          <View className="flex-row items-center justify-between mt-3">
+          <View className="flex-row items-center justify-between mt=[12px]">
             <View className="flex-row items-center">
-              <Text className="text-dark-gray mr-[4px] ml-[4px">수량:</Text>
+              <Text className="text-dark-gray mr-[4px]">수량</Text>
               <View className="flex-row items-center border border-light-gray rounded-[12px]">
                 <PlusMinusButton
                   onDecrease={() => updateQuantity(item.id, item.quantity - 1)}
@@ -164,10 +164,10 @@ const BasketScreen = () => {
         {/* 빈 장바구니 내용 */}
         <View className="flex-1 justify-center items-center">
           <Ionicons name="cart-outline" size={80} color="#9ca3af" />
-          <Text className="text-xl font-semibold text-gray mt-[4px]">
+          <Text className="text-[16px] font-semibold text-gray mt-[4px]">
             장바구니가 비어있습니다
           </Text>
-          <Text className="text-gray mt-[4px] text-center px-[8px]">
+          <Text className="text-[12px] text-gray mt-[4px] text-center px-[8px]">
             상품을 장바구니에 담고 주문해보세요
           </Text>
         </View>

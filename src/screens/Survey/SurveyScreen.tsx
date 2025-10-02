@@ -1,5 +1,12 @@
 import React, { useState, useRef } from 'react';
-import { View, Text, TouchableOpacity, ScrollView, Dimensions, Animated } from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  ScrollView,
+  Dimensions,
+  Animated,
+} from 'react-native';
 import { questions, SurveyResult } from '../../data/questions';
 import { getHealthAdvice } from '../../data/healthUtils';
 import { useRootNavigation } from '../../navigation/Navigation';
@@ -52,8 +59,6 @@ const SurveyScreen = () => {
     return Math.round((totalScore / (questions.length * 4)) * 100);
   };
 
-
-
   if (showResult) {
     const score = calculateHealthScore();
     const { level, color, advice } = getHealthAdvice(score);
@@ -62,19 +67,38 @@ const SurveyScreen = () => {
       <View className="flex-1 bg-background">
         <ScrollView>
           <View className="flex-1 justify-center items-center p-[24px]">
-            <Text className="text-[30px] font-bold text-gray-800 mb-[24px]">건강체크 결과</Text>
+            <Text className="text-[30px] font-bold text-gray-800 mb-[24px]">
+              건강체크 결과
+            </Text>
 
             <View className="bg-background rounded-[16px] p-[32px] w-full items-center mb-[32px]">
-              <Text className="text-[60px] font-bold mb-[16px]" style={{ color }}>{score}점</Text>
-              <Text className="text-[20px] font-semibold mb-[8px]" style={{ color }}>{level}</Text>
-              <Text className="text-gray-600 text-center">{advice}</Text>
+              <Text
+                className="text-[60px] font-bold mb-[16px]"
+                style={{ color }}
+              >
+                {score}점
+              </Text>
+              <Text
+                className="text-[20px] font-semibold mb-[8px]"
+                style={{ color }}
+              >
+                {level}
+              </Text>
+              <Text className="text-gray-600 text-center w-full">{advice}</Text>
             </View>
 
             <View className="w-full">
-              <Text className="text-[18px] font-semibold text-gray-800 mb-[16px]">상세 결과</Text>
-              {questions.map((question) => (
-                <View key={question.id} className="bg-white border border-gray rounded-[8px] p-[16px] mb-[12px]">
-                  <Text className="text-[14px] text-gray mb-[4px]">{question.question}</Text>
+              <Text className="text-[18px] font-semibold text-gray-800 mb-[16px]">
+                상세 결과
+              </Text>
+              {questions.map(question => (
+                <View
+                  key={question.id}
+                  className="bg-white border border-gray rounded-[8px] p-[16px] mb-[12px]"
+                >
+                  <Text className="text-[14px] text-gray mb-[4px]">
+                    {question.question}
+                  </Text>
                   <Text className="text-base font-medium text-gray">
                     {question.options[answers[question.id] || 0]}
                   </Text>
@@ -90,7 +114,9 @@ const SurveyScreen = () => {
                 setShowResult(false);
               }}
             >
-              <Text className="text-white text-[18px] font-semibold">다시 검사하기</Text>
+              <Text className="text-white text-[18px] font-semibold">
+                다시 검사하기
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity
               className="bg-light-blue rounded-[12px] py-[16px] px-[32px] mt-[24px]"
@@ -101,7 +127,9 @@ const SurveyScreen = () => {
                 });
               }}
             >
-              <Text className="text-white text-[18px] font-semibold">앱 이용하기</Text>
+              <Text className="text-white text-[18px] font-semibold">
+                앱 이용하기
+              </Text>
             </TouchableOpacity>
           </View>
         </ScrollView>
@@ -117,8 +145,9 @@ const SurveyScreen = () => {
           {questions.map((_, index) => (
             <View
               key={index}
-              className={`h-[12px] flex-1 mx-[4px] rounded-[12px] ${index <= currentIndex ? 'bg-white' : 'bg-blue'
-                }`}
+              className={`h-[12px] flex-1 mx-[4px] rounded-[12px] ${
+                index <= currentIndex ? 'bg-white' : 'bg-blue'
+              }`}
             />
           ))}
         </View>
@@ -137,17 +166,19 @@ const SurveyScreen = () => {
             {questions[currentIndex].options.map((option, index) => (
               <TouchableOpacity
                 key={index}
-                className={`p-[16px] mb-[16px] rounded-[12px] border-2 ${answers[questions[currentIndex].id] === index
+                className={`p-[16px] mb-[16px] rounded-[12px] border-2 ${
+                  answers[questions[currentIndex].id] === index
                     ? 'border-light-blue'
                     : 'border-gray bg-white'
-                  }`}
+                }`}
                 onPress={() => handleAnswer(questions[currentIndex].id, index)}
               >
                 <Text
-                  className={`text-[18px] ${answers[questions[currentIndex].id] === index
+                  className={`text-[18px] ${
+                    answers[questions[currentIndex].id] === index
                       ? 'text-light-blue font-semibold'
                       : 'text-dark-gray'
-                    }`}
+                  }`}
                 >
                   {option}
                 </Text>
@@ -156,10 +187,11 @@ const SurveyScreen = () => {
           </View>
 
           <TouchableOpacity
-            className={`py-[16px] px-[32px] rounded-[12px] ${answers[questions[currentIndex].id] !== undefined
+            className={`py-[16px] px-[32px] rounded-[12px] ${
+              answers[questions[currentIndex].id] !== undefined
                 ? 'bg-light-blue'
                 : 'bg-light-gray'
-              }`}
+            }`}
             onPress={handleNext}
             disabled={answers[questions[currentIndex].id] === undefined}
           >
