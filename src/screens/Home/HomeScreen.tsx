@@ -4,6 +4,7 @@ import { useRootNavigation } from '../../navigation/Navigation';
 import SearchInput from '../../components/SearchInput';
 import ProductBadge from '../../components/ProductBadge';
 import { useProduct } from '../../hooks/useProductService';
+import { EmptyStateView } from '../../components/EmptyStateView';
 const HomeScreen = () => {
   const [searchFocus, setSearchFocus] = useState(false);
   const navigation = useRootNavigation();
@@ -92,7 +93,9 @@ const HomeScreen = () => {
       <FlatList
         className="flex-1"
         data={products}
-        contentContainerStyle={products.length === 0 ? { flex: 1 } : {}}
+        contentContainerStyle={
+          products.length === 0 ? { flexGrow: 1 } : { paddingBottom: 16 }
+        }
         renderItem={({ item }) => (
           <TouchableOpacity
             className="m-2 p-4 border border-light-gray rounded-[12px] bg-white"
@@ -113,11 +116,7 @@ const HomeScreen = () => {
             </Text>
           </TouchableOpacity>
         )}
-        ListEmptyComponent={
-          <View className="flex-1 justify-center items-center">
-            <Text className="text-gray text-center w-full">검색결과가 없습니다.</Text>
-          </View>
-        }
+        ListEmptyComponent={<EmptyStateView />}
         keyExtractor={item => item.id.toString()}
         numColumns={1}
       />

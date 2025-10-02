@@ -164,7 +164,7 @@ const BasketScreen = () => {
         {/* 빈 장바구니 내용 */}
         <View className="flex-1 justify-center items-center">
           <Ionicons name="cart-outline" size={80} color="#9ca3af" />
-          <Text className="text-[16px] font-semibold text-gray mt-[4px]">
+          <Text className="text-[16px] font-semibold text-dark-gray mt-[4px]">
             장바구니가 비어있습니다
           </Text>
           <Text className="text-[12px] text-gray mt-[4px] text-center px-[8px]">

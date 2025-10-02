@@ -5,7 +5,7 @@ import { useOrder } from '../../hooks/useOrderService';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import SearchInput from '../../components/SearchInput';
 import { useState, useEffect } from 'react';
-
+import { EmptyStateView } from '../../components/EmptyStateView';
 const OrderListScreen = () => {
   const { orders } = useOrderStore();
   const { fetchOrders } = useOrder();
@@ -160,6 +160,10 @@ const OrderListScreen = () => {
               setFilteredOrders(orders);
             }
           }}
+          onClearPress={() => {
+            setSearch('');
+            setFilteredOrders(orders);
+          }}
           onFocus={() => setSearchFocus(true)}
           onBlur={() => setSearchFocus(false)}
           showSearchButton={searchFocus}
@@ -173,19 +177,9 @@ const OrderListScreen = () => {
         data={filteredOrders}
         renderItem={renderOrderItem}
         keyExtractor={item => item.id}
-        contentContainerStyle={{ paddingVertical: 16 }}
+        contentContainerStyle={{ flex: 1, paddingVertical: 16 }}
         showsVerticalScrollIndicator={false}
-        ListEmptyComponent={
-          <View className="flex-1 justify-center items-center">
-            <Ionicons name="search-outline" size={80} color="#9ca3af" />
-            <Text className="text-[16px] font-semibold text-dark-gray mt-[16px]">
-              검색 결과가 없습니다
-            </Text>
-            <Text className="text-[12px] text-dark-gray mt-[8px] text-center px-[8px]">
-              다른 검색어로 다시 시도해보세요
-            </Text>
-          </View>
-        }
+        ListEmptyComponent={<EmptyStateView />}
       />
     </View>
   );
