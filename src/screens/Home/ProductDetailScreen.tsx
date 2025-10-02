@@ -184,7 +184,7 @@ const ReviewTab = ({ product }: { product: ProductInfo }) => {
   return (
     <ScrollView className="flex-1 p-4 bg-background">
       {product?.ProductReview?.map((review: ProductReview) => (
-        <View key={review.id} className="mb-4 p-4 bg-gray-50 rounded-[12px]">
+        <View key={review.id} className="mb-4 p-4 bg-gray-50 border border-light-gray rounded-[12px]">
           <View className="flex-row items-center mb-2">
             <Text className="font-semibold text-blue">{review.reviewer}</Text>
             <Text className="ml-[4px] text-yellow">
